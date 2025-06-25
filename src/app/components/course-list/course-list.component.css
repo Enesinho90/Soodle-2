@@ -24,3 +24,33 @@ img {
     max-width: 90%;
 
 }
+
+.professor {
+    color: #588157;
+}
+
+@media (max-width: 700px) {
+    .container-courses {
+        margin-left: 5%;
+    }
+
+    .course {
+        width: 400px;
+    }
+}
+
+@media (max-width: 500px) {
+    .course {
+        width: 350px;
+    }
+}
+
+@media (max-width: 400px) {
+    .course {
+        width: 350px;
+    }
+
+    .container-courses {
+        margin-left: 0px;
+    }
+}
