@@ -1,0 +1,32 @@
+<main>
+  <section class="login">
+    <img class="Soodle-logo" src="/images/login/logo.png" />
+    <p class="slogan">Ta plateforme, ton savoir, ton avenir.</p>
+    
+    <form [formGroup]="loginForm" id="login-form">
+      <h1>Connecte-toi à Soodle</h1>
+
+      <label for="login-input">Identifiant</label>
+      <div class="login-input-container">
+        <input id="login-input" type="email" placeholder="nomprenom@soodle.fr" formControlName="email" />
+        <i class="fa-regular fa-envelope"></i>
+      </div>
+
+      <label for="motdepasse-input">Password</label>
+      <div class="motdepasse-input-container">
+        <input id="motdepasse-input" type="password" placeholder="mot de passe" formControlName="mot_de_passe" />
+        <i class="fa-regular fa-eye"></i>
+        <i class="fa-eye-slash hiddeneye"></i>
+      </div>
+
+      <button class="button-style" type="submit" (click)="allerAuDashboard()">
+        Connexion
+      </button>
+    </form>
+  </section>
+
+  <div class="background">
+    <img src="/images/login/background.png"/>
+  </div>
+  
+</main>

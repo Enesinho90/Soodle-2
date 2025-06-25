@@ -9,5 +9,4 @@ import { ActualitiesComponent } from "../../components/actualities/actualities.c
   styleUrl: './courses-page.component.css'
 })
 export class CoursesPageComponent {
-
 }
