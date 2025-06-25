@@ -1,22 +1,23 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
     <div class="navbar">
         <div class="navbar-left">
             <img class=logo-navbar src="soodle-s-nobg.png" alt="logo Soodle">
             <p class="pages-navbar"> <a class="link-to-page" href=""> Mes cours </a> </p>
-                <p class="pages-navbar"> <a class="link-to-page" href=""> Admin </a> </p>
+            <p class="pages-navbar"> <a class="link-to-page" href=""> Admin </a> </p>
         </div>
         <div class="navbar-right">
             <i class="fa-regular fa-bell"></i>
-            <img id="profil-picture" (click)="togglePopup()" class="avatar" src="avatar/avatar.jpg" alt="avatar">
+            <img id="profil-picture" (click)="togglePopup()" class="avatar" src="images/avatar/avatar.jpg" alt="avatar">
         </div>
     </div>
     <div id="profil-popup" *ngIf="isProfileInformationsVisible">
         <div class="profil-informations">
-            <img class="avatar-onclick" src="avatar/avatar.jpg" alt="avatar">
+            <img class="avatar-onclick" src="images/avatar/avatar.jpg" alt="avatar">
             <div class="person">
                 <p class="username">Nom Prenom </p>
                 <p class="usermail"> Mail</p>

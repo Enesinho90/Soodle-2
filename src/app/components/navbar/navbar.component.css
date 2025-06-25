@@ -60,11 +60,13 @@ img {
     border: #DAD7CD 2px solid;
     cursor: pointer;
 }
-.avatar:hover{
+
+.avatar:hover {
     border: #A3B18A 3px solid;
     transition: 0.1s;
 }
-.avatar:active{
+
+.avatar:active {
     border: #FFFFFF 3px solid;
 }
 
