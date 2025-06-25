@@ -19,7 +19,7 @@ export class UserService {
             id: 2,
             email: "marieleroy@puenta.fr",
             roles: ["ROLE_USER"],
-            avatar: "avatar2.jpg",
+            avatar: "avatar.jpg",
             password: "azerty",
             nom: "Leroy",
             prenom: "Marie"
@@ -28,7 +28,7 @@ export class UserService {
             id: 3,
             email: "lucdubois@puenta.fr",
             roles: ["ROLE_USER", "ROLE_PROFESSOR"],
-            avatar: "avatar3.jpg",
+            avatar: "avatar.jpg",
             password: "motdepasse",
             nom: "Dubois",
             prenom: "Luc"
@@ -37,7 +37,7 @@ export class UserService {
             id: 4,
             email: "anais.martin@puenta.fr",
             roles: ["ROLE_USER"],
-            avatar: "avatar4.jpg",
+            avatar: "avatar.jpg",
             password: "123456",
             nom: "Martin",
             prenom: "Anaïs"
@@ -46,7 +46,7 @@ export class UserService {
             id: 5,
             email: "thomas.durand@puenta.fr",
             roles: ["ROLE_USER", "ROLE_ADMIN"],
-            avatar: "avatar5.jpg",
+            avatar: "avatar.jpg",
             password: "adminpass",
             nom: "Durand",
             prenom: "Thomas"

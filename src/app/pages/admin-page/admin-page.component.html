@@ -3,62 +3,66 @@
 </div>
 <div class="container">
     <div class="informations">
-        <p>Il y a actuellement <span class="green">xxx</span> étudiants et <span class="green">xxx</span> unités
+        <p>Il y a actuellement <span class="green">{{userList.length}}</span> étudiants et <span
+                class="green">{{courseList.length}}</span> unités
             d'enseignement</p>
     </div>
     <div class="buttons">
-        <button class="active" id="userButton" onclick="displayUsers()">Utilisateurs</button><button
-            onclick="displayUEs()" id="ueButton">Unités
+        <button [class.active]="isChoosingUsers" id="userButton" (click)="swapDisplayToCourses()">Utilisateurs</button>
+        <button [class.active]="isChoosingCourses" (click)="swapDisplayToUsers()" id="ueButton">Unités
             d'enseignement</button>
     </div>
     <div id="add">
         <button class="add">Ajouter</button>
     </div>
-    <table id="users">
-        <tr data-user-id="">
-            <td><img class="image-table" src="" alt="Avatar"></td>
-            <td>PRENOM NOM</td>
-            <td>ROLE
-            </td>
-            <td>MAIL</td>
-            <td class="interact-buttons">
-                <form action="" method="post">
-                    <button class="small" type="submit">
-                        <i class="fa-solid fa-book"></i>
-                    </button>
-                </form>
 
-                <form action="" method="post"
-                    onsubmit="return confirm('Êtes-vous sûr de vouloir modifier cet utilisateur ?');">
-                    <button class="small" type="submit">
-                        <i class="fa-solid fa-pencil"></i>
-                    </button>
-                </form>
+    @if (isChoosingUsers) {
+    <table id="users">
+        @for (user of userList; track user) {
+        <tr>
+            <td><img class="image-table" src="images/avatar/{{user.avatar}}" alt="Avatar"></td>
+            <td>{{user.prenom}} {{user.nom}}</td>
+            <td>{{user.roles}}
+            </td>
+            <td>{{user.email}}</td>
+            <td class="interact-buttons">
+                <button class="small" type="submit">
+                    <i class="fa-solid fa-book"></i>
+                </button>
+
+
+                <button class="small" type="submit">
+                    <i class="fa-solid fa-pencil"></i>
+                </button>
 
                 <button class="small delete-user" data-id="">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
         </tr>
+        }
     </table>
+    }
+    @if (isChoosingCourses) {
 
-    <table class="hide" id="ues">
-        <tr data-ue-id="">
-            <td><img class="image-table" src="" alt="Image UE"></td>
-            <td>CODE</td>
-            <td>INTITULE</td>
+    <table id="ues">
+        @for (course of courseList; track course) {
+        <tr>
+            <td><img class="image-table" src="images/cours/{{ course.imageUrl}}" alt="Image UE"></td>
+            <td>{{course.code}}</td>
+            <td>{{course.intitule}}</td>
             <td class="interact-buttons">
-                <form action="" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir modifier cet UE ?');">
-                    <button class="small" type="submit">
-                        <i class="fa-solid fa-pencil"></i>
-                    </button>
-                </form>
+                <button class="small" type="submit">
+                    <i class="fa-solid fa-pencil"></i>
+                </button>
                 <button class="small delete-ue" data-id="">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
         </tr>
+        }
     </table>
+    }
 
 </div>
 

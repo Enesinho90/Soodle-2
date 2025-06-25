@@ -119,7 +119,7 @@ tr:nth-child(even) {
     background-color: #bab8b8;
 }
 
-@media (max-width:600px) {
+@media (max-width:900px) {
     .image-table {
         display: none;
     }
