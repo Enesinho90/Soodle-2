@@ -15,9 +15,9 @@
     <div id="add">
         <button class="add">Ajouter</button>
     </div>
-
     @if (isChoosingUsers) {
     <table id="users">
+
         @for (user of userList; track user) {
         <tr>
             <td><img class="image-table" src="images/avatar/{{user.avatar}}" alt="Avatar"></td>
@@ -29,20 +29,16 @@
                 <button class="small" type="submit">
                     <i class="fa-solid fa-book"></i>
                 </button>
-
-
                 <button class="small" type="submit">
                     <i class="fa-solid fa-pencil"></i>
                 </button>
-
                 <button class="small delete-user" data-id="">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
         </tr>
         }
-    </table>
-    }
+    </table>}
     @if (isChoosingCourses) {
 
     <table id="ues">
