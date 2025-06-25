@@ -1,6 +1,8 @@
 import { Course } from './../../models/course';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CourseComponent } from '../course/course.component';
+import { CourseService } from '../../services/course.service';
+
 @Component({
   selector: 'app-course-list',
   imports: [CourseComponent],
@@ -8,6 +10,9 @@ import { CourseComponent } from '../course/course.component';
   styleUrl: './course-list.component.css'
 })
 export class CourseListComponent {
-  @Input() courseList: Course[] = [];
+  courseList: Course[] = [];
 
+  constructor(private courseService: CourseService) {
+    this.courseList = this.courseService.getCourses();
+  }
 }

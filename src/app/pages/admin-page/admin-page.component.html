@@ -1,0 +1,71 @@
+<div class="title">
+    <h1> Administration</h1>
+</div>
+<div class="container">
+    <div class="informations">
+        <p>Il y a actuellement <span class="green">xxx</span> étudiants et <span class="green">xxx</span> unités
+            d'enseignement</p>
+    </div>
+    <div class="buttons">
+        <button class="active" id="userButton" onclick="displayUsers()">Utilisateurs</button><button
+            onclick="displayUEs()" id="ueButton">Unités
+            d'enseignement</button>
+    </div>
+    <div id="add">
+        <button class="add">Ajouter</button>
+    </div>
+    <table id="users">
+        <tr data-user-id="">
+            <td><img class="image-table" src="" alt="Avatar"></td>
+            <td>PRENOM NOM</td>
+            <td>ROLE
+            </td>
+            <td>MAIL</td>
+            <td class="interact-buttons">
+                <form action="" method="post">
+                    <button class="small" type="submit">
+                        <i class="fa-solid fa-book"></i>
+                    </button>
+                </form>
+
+                <form action="" method="post"
+                    onsubmit="return confirm('Êtes-vous sûr de vouloir modifier cet utilisateur ?');">
+                    <button class="small" type="submit">
+                        <i class="fa-solid fa-pencil"></i>
+                    </button>
+                </form>
+
+                <button class="small delete-user" data-id="">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </table>
+
+    <table class="hide" id="ues">
+        <tr data-ue-id="">
+            <td><img class="image-table" src="" alt="Image UE"></td>
+            <td>CODE</td>
+            <td>INTITULE</td>
+            <td class="interact-buttons">
+                <form action="" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir modifier cet UE ?');">
+                    <button class="small" type="submit">
+                        <i class="fa-solid fa-pencil"></i>
+                    </button>
+                </form>
+                <button class="small delete-ue" data-id="">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+    var createUEUrl = "";
+    var createUserUrl = "";
+
+
+
+</script>

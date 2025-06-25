@@ -1,34 +1,30 @@
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-
-<body>
-
-    <div class="navbar">
-        <div class="navbar-left">
-            <img class=logo-navbar src="soodle-s-nobg.png" alt="logo Soodle">
-            <p class="pages-navbar"> <a class="link-to-page" href=""> Mes cours </a> </p>
-            <p class="pages-navbar"> <a class="link-to-page" href=""> Admin </a> </p>
-        </div>
-        <div class="navbar-right">
-            <i class="fa-regular fa-bell"></i>
-            <img id="profil-picture" (click)="togglePopup()" class="avatar" src="images/avatar/avatar.jpg" alt="avatar">
+<div class="navbar">
+    <div class="navbar-left">
+        <img class=logo-navbar src="soodle-s-nobg.png" alt="logo Soodle">
+        <p class="pages-navbar">
+            <a class="link-to-page" routerLink="/courses">
+                Mes cours
+            </a>
+        </p>
+        <p class="pages-navbar"> <a class="link-to-page" routerLink="/admin"> Admin </a>
+        </p>
+    </div>
+    <div class="navbar-right">
+        <i class="fa-regular fa-bell"></i>
+        <img id="profil-picture" (click)="togglePopup()" class="avatar" src="images/avatar/avatar.jpg" alt="avatar">
+    </div>
+</div>
+<div id="profil-popup" *ngIf="isProfileInformationsVisible">
+    <div class="profil-informations">
+        <img class="avatar-onclick" src="images/avatar/avatar.jpg" alt="avatar">
+        <div class="person">
+            <p class="username">Nom Prenom </p>
+            <p class="usermail"> Mail</p>
+            <p class="userrole"> Role</p>
         </div>
     </div>
-    <div id="profil-popup" *ngIf="isProfileInformationsVisible">
-        <div class="profil-informations">
-            <img class="avatar-onclick" src="images/avatar/avatar.jpg" alt="avatar">
-            <div class="person">
-                <p class="username">Nom Prenom </p>
-                <p class="usermail"> Mail</p>
-                <p class="userrole"> Role</p>
-            </div>
-
-        </div>
-        <hr>
-        <p class="acces-profil"> <a href=""><i class="fa-regular fa-user"></i>Accéder a mon profil</a></p>
-        <hr>
-        <p class="acces-profil"><a href=""><i class="fa-solid fa-arrow-right-to-bracket"></i>Deconnexion</a></p>
-    </div>
-
-</body>
+    <hr>
+    <p class="acces-profil"> <a routerLink="/profil"><i class="fa-regular fa-user"></i>Accéder a mon profil</a></p>
+    <hr>
+    <p class="acces-profil"><a routerLink="/"><i class="fa-solid fa-arrow-right-to-bracket"></i>Deconnexion</a></p>
+</div>
