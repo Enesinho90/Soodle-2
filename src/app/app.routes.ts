@@ -6,14 +6,18 @@ import { CoursesPageComponent } from './pages/courses-page/courses-page.componen
 import { ProfilComponent } from './components/profil/profil.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { LoginFormComponent } from './pages/login-form/login-form.component';
+import { ProfilModificationFormComponent } from './components/profil-modification-form/profil-modification-form.component';
+import { ProfilPasswordFormComponent } from './components/profil-password-form/profil-password-form.component';
 
 export const routes: Routes = [
     { path: 'courses', component: CoursesPageComponent },
     { path: '', redirectTo: 'courses', pathMatch: 'full' },
     { path: 'admin', component: AdminPageComponent },
     { path: 'profil', component: ProfilComponent },
-    { path : 'login', component : LoginFormComponent}
-    
+    { path: 'login', component: LoginFormComponent },
+    { path: 'profil/modifier', component: ProfilModificationFormComponent },
+    { path: 'profil/changer-mdp', component: ProfilPasswordFormComponent }
+
 
     // ...autres routes
 ];
