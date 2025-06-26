@@ -1,3 +1,10 @@
+* {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    box-sizing: border-box;
+}
+
 
 /* ========== Structure principale de la section : #contenu-ue ========== */
 #contenu-ue {
@@ -6,7 +13,7 @@
 }
 
 /* ========== Boutons principaux ========== */
-.button-style{
+.button-style {
     background-color: #588157;
     border: none;
     border-radius: 8px;
@@ -26,7 +33,7 @@
 }
 
 /* ========== Textes / Titres ========== */
-#contenu-ue > h1 {
+#contenu-ue>h1 {
     color: #3a5a40;
     font-weight: 700;
     margin-bottom: 10px;
@@ -41,7 +48,8 @@ a.link-participants {
 }
 
 a.link-participants:hover {
-    background-color: rgba(44, 62, 80, 0.1); /* fond discret au survol */
+    background-color: rgba(44, 62, 80, 0.1);
+    /* fond discret au survol */
 }
 
 a {

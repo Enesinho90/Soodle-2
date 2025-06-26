@@ -8,21 +8,24 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './course-header.component.html',
   styleUrl: './course-header.component.css'
 })
-export class CourseHeaderComponent implements OnInit{
+export class CourseHeaderComponent implements OnInit {
 
-header_text = ""
+  header_text = ""
 
   ngOnInit(): void {
-    if(this.router.url.includes('/courses/') && this.router.url.includes('/post')) {
+    if (this.router.url.includes('/courses/') && this.router.url.includes('/post')) {
       this.header_text = "Modification / Creation UE"
-    } else if(this.router.url.includes('/courses/')) {
-      this.header_text = "WE4E - Web Développement" 
+    } else if (this.router.url.includes('/courses/') && this.router.url.includes('/participants')) {
+      this.header_text = "Liste des participants"
+    }
+    else if (this.router.url.includes('/courses/')) {
+      this.header_text = "WE4E - Web Développement"
     }
   }
-  
-  constructor(private router : Router) {
+
+  constructor(private router: Router) {
   }
-  
+
 
 
 

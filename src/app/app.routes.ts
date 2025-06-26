@@ -13,6 +13,8 @@ import { AffectationUeFormComponent } from './forms/affectation-ue-form/affectat
 import { ModifyUserFormComponent } from './forms/modify-user-form/modify-user-form.component';
 import { ModifyUeFormComponent } from './forms/modify-ue-form/modify-ue-form.component';
 import { PageCreationModificationComponent } from './pages/page-creation-modification/page-creation-modification.component';
+import { ParticipantsComponent } from './components/participants/participants.component';
+
 
 
 export const routes: Routes = [
@@ -27,10 +29,12 @@ export const routes: Routes = [
     { path: 'admin/add_ue', component: UeFormComponent },
     { path: 'login', component: LoginFormComponent },
     { path: 'courses/:id', component: UeContentPageComponent },
-    { path:'courses/:id/post', component : PageCreationModificationComponent},
+    { path: 'courses/:id/post', component: PageCreationModificationComponent },
     { path: 'admin/affectations/:id', component: AffectationUeFormComponent },
     { path: 'admin/modify_user/:id', component: ModifyUserFormComponent },
-    { path: 'admin/modify_ue/:id', component: ModifyUeFormComponent }
+    { path: 'admin/modify_ue/:id', component: ModifyUeFormComponent },
+    { path: 'courses/:id/participants', component: ParticipantsComponent }
+
 
 
 ];

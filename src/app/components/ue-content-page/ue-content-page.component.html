@@ -1,8 +1,8 @@
 <main>
   <div class="full-width">
-    <app-course-header ></app-course-header>
+    <app-course-header></app-course-header>
     <p class="participants">
-      <a class="link-participants" href="#">Participants</a>
+      <a class="link-participants" [routerLink]="['/courses', courseId, 'participants']">Participants</a>
     </p>
     <h2 class="publications">Publications</h2>
     <div class="search-add-bar">
@@ -13,7 +13,6 @@
     </div>
     <app-list-post></app-list-post>
   </div>
-  
-    
-</main>
 
+
+</main>
