@@ -6,9 +6,12 @@ import { CoursesPageComponent } from './pages/courses-page/courses-page.componen
 import { ProfilComponent } from './components/profil/profil.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { LoginFormComponent } from './pages/login-form/login-form.component';
+
 import { ProfilModificationFormComponent } from './components/profil-modification-form/profil-modification-form.component';
 import { ProfilPasswordFormComponent } from './components/profil-password-form/profil-password-form.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { UeContentPageComponent } from './pages/ue-content-page/ue-content-page.component';
+
 
 export const routes: Routes = [
     { path: 'courses', component: CoursesPageComponent },
@@ -20,7 +23,7 @@ export const routes: Routes = [
     { path: 'profil/change_password', component: ProfilPasswordFormComponent },
     { path: 'admin/add_user', component: UserFormComponent },
     { path: 'admin/add_ue', component: UserFormComponent },
+    { path: 'login', component: LoginFormComponent },
+    { path: 'courses/:id', component: UeContentPageComponent }
 
-
-    // ...autres routes
 ];

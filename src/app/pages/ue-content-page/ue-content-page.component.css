@@ -1,0 +1,71 @@
+/* <== section : Paramètres globaux > */
+* {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    box-sizing: border-box;
+}
+
+main {
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.full-width {
+    width: 80%;
+}
+
+.publications {
+    color: #3a5a40;
+    font-size: 2em;
+}
+
+.participants {
+    display: inline-block;
+    color: #a3b18a;
+    font-size: 1.2em;
+    margin-top: 0;
+
+}
+
+.button-add {
+    font-size: 30px;
+    padding: 10px 15px;
+    flex-shrink: 0;
+    background-color: #588157;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.button-add:hover {
+    background-color: #3a5a40;
+}
+
+.search-add-bar {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+a.link-participants {
+    display: inline-block;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.link-participants:hover {
+    background-color: rgba(44, 62, 80, 0.1); /* fond discret au survol */
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+
