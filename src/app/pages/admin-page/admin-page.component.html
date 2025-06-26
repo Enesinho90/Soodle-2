@@ -8,12 +8,12 @@
             d'enseignement</p>
     </div>
     <div class="buttons">
-        <button [class.active]="isChoosingUsers" id="userButton" (click)="swapDisplayToCourses()">Utilisateurs</button>
-        <button [class.active]="isChoosingCourses" (click)="swapDisplayToUsers()" id="ueButton">Unités
+        <button [class.active]="isChoosingUsers" id="userButton" (click)="swapDisplayToUsers()">Utilisateurs</button>
+        <button [class.active]="isChoosingCourses" (click)="swapDisplayToCourses()" id="ueButton">Unités
             d'enseignement</button>
     </div>
     <div id="add">
-        <button class="add">Ajouter</button>
+        <button class="add" (click)="onAdd()">Ajouter</button>
     </div>
     @if (isChoosingUsers) {
     <table id="users">

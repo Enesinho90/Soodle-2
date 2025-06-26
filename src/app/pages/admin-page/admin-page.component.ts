@@ -3,6 +3,7 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { Course } from '../../models/course';
 import { CourseService } from '../../services/course.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,19 +18,26 @@ export class AdminPageComponent {
   userList: User[] = [];
   courseList: Course[] = []; // Assuming you will implement course list later
 
-  constructor(private userService: UserService, private courseService: CourseService) {
+  constructor(private userService: UserService, private courseService: CourseService, private router: Router) {
     this.userList = this.userService.getUsers();
     this.courseList = this.courseService.getCourses(); // Initialize with an empty array or fetch from a service
   }
 
-  swapDisplayToUsers() {
+  swapDisplayToCourses() {
     this.isChoosingUsers = false;
     this.isChoosingCourses = true;
   }
 
-  swapDisplayToCourses() {
+  swapDisplayToUsers() {
     this.isChoosingCourses = false;
     this.isChoosingUsers = true;
   }
 
+  onAdd() {
+    if (this.isChoosingUsers) {
+      this.router.navigate(['/admin/add_user']);
+    } else {
+      this.router.navigate(['/admin/add_ue']);
+    }
+  }
 }

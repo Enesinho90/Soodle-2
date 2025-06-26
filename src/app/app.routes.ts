@@ -8,6 +8,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { LoginFormComponent } from './pages/login-form/login-form.component';
 import { ProfilModificationFormComponent } from './components/profil-modification-form/profil-modification-form.component';
 import { ProfilPasswordFormComponent } from './components/profil-password-form/profil-password-form.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 export const routes: Routes = [
     { path: 'courses', component: CoursesPageComponent },
@@ -15,8 +16,10 @@ export const routes: Routes = [
     { path: 'admin', component: AdminPageComponent },
     { path: 'profil', component: ProfilComponent },
     { path: 'login', component: LoginFormComponent },
-    { path: 'profil/modifier', component: ProfilModificationFormComponent },
-    { path: 'profil/changer-mdp', component: ProfilPasswordFormComponent }
+    { path: 'profil/modifiy', component: ProfilModificationFormComponent },
+    { path: 'profil/change_password', component: ProfilPasswordFormComponent },
+    { path: 'admin/add_user', component: UserFormComponent },
+    { path: 'admin/add_ue', component: UserFormComponent },
 
 
     // ...autres routes
