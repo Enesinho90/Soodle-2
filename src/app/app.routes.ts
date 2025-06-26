@@ -14,6 +14,7 @@ import { UeFormComponent } from './forms/ue-form/ue-form.component';
 import { UeContentPageComponent } from './components/ue-content-page/ue-content-page.component';
 import { AffectationUeFormComponent } from './forms/affectation-ue-form/affectation-ue-form.component';
 import { ModifyUserFormComponent } from './forms/modify-user-form/modify-user-form.component';
+import { ModifyUeFormComponent } from './forms/modify-ue-form/modify-ue-form.component';
 
 
 export const routes: Routes = [
@@ -29,6 +30,8 @@ export const routes: Routes = [
     { path: 'login', component: LoginFormComponent },
     { path: 'courses/:id', component: UeContentPageComponent },
     { path: 'admin/affectations/:id', component: AffectationUeFormComponent },
-    { path: 'admin/modify_user/:id', component: ModifyUserFormComponent }
+    { path: 'admin/modify_user/:id', component: ModifyUserFormComponent },
+    { path: 'admin/modify_ue/:id', component: ModifyUeFormComponent }
+
 
 ];

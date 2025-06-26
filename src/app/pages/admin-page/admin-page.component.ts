@@ -48,4 +48,7 @@ export class AdminPageComponent {
   goToModifyUser(id: number) {
     this.router.navigate(['/admin/modify_user', id]);
   }
+  goToModifyUe(id: number) {
+    this.router.navigate(['/admin/modify_ue', id]);
+  }
 }

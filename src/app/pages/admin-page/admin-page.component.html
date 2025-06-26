@@ -48,8 +48,8 @@
             <td>{{course.code}}</td>
             <td>{{course.intitule}}</td>
             <td class="interact-buttons">
-                <button class="small" type="submit">
-                    <i class="fa-solid fa-pencil"></i>
+                <button class="small" type="submit" (click)="goToModifyUe(course.id)">
+                    <i class=" fa-solid fa-pencil"></i>
                 </button>
                 <button class="small delete-ue" data-id="">
                     <i class="fa-solid fa-trash"></i>
@@ -61,11 +61,3 @@
     }
 
 </div>
-
-<script>
-    var createUEUrl = "";
-    var createUserUrl = "";
-
-
-
-</script>
