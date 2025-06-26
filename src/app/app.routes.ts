@@ -6,14 +6,14 @@ import { CoursesPageComponent } from './pages/courses-page/courses-page.componen
 import { ProfilComponent } from './components/profil/profil.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { LoginFormComponent } from './pages/login-form/login-form.component';
+import { UeContentPageComponent } from './pages/ue-content-page/ue-content-page.component';
 
 export const routes: Routes = [
-    { path: 'courses', component: CoursesPageComponent },
+    { path: 'courses', component: CoursesPageComponent},
     { path: '', redirectTo: 'courses', pathMatch: 'full' },
     { path: 'admin', component: AdminPageComponent },
     { path: 'profil', component: ProfilComponent },
-    { path : 'login', component : LoginFormComponent}
-    
-
-    // ...autres routes
+    { path : 'login', component : LoginFormComponent},
+    { path : 'courses/:id',component : UeContentPageComponent}
+   
 ];

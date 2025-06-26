@@ -1,0 +1,51 @@
+
+/* ========== Structure principale de la section : #contenu-ue ========== */
+#contenu-ue {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========== Boutons principaux ========== */
+.button-style{
+    background-color: #588157;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Bouton de retour */
+.button-style {
+    width: 100px;
+    height: 50px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ========== Textes / Titres ========== */
+#contenu-ue > h1 {
+    color: #3a5a40;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+
+a.link-participants {
+    display: inline-block;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.link-participants:hover {
+    background-color: rgba(44, 62, 80, 0.1); /* fond discret au survol */
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
