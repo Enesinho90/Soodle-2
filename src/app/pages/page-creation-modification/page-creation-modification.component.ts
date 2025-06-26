@@ -10,4 +10,8 @@ import { PostFormComponent } from "../../components/modification-creation/post-f
   styleUrl: './page-creation-modification.component.css'
 })
 export class PageCreationModificationComponent {
+  selectType : string = 'message';
+  onTypeSelect(type : string) {
+    this.selectType = type
+  }
 }
