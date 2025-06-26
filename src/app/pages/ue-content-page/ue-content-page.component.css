@@ -17,6 +17,8 @@ main {
     width: 80%;
 }
 
+
+
 .publications {
     color: #3a5a40;
     font-size: 2em;
@@ -47,7 +49,6 @@ main {
 }
 
 .search-add-bar {
-    width: 80%;
     display: flex;
     justify-content: space-between;
 }

@@ -11,6 +11,7 @@ import { ProfilModificationFormComponent } from './components/profil-modificatio
 import { ProfilPasswordFormComponent } from './components/profil-password-form/profil-password-form.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UeContentPageComponent } from './pages/ue-content-page/ue-content-page.component';
+import { PageCreationModificationComponent } from './pages/page-creation-modification/page-creation-modification.component';
 
 
 export const routes: Routes = [
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: 'admin/add_user', component: UserFormComponent },
     { path: 'admin/add_ue', component: UserFormComponent },
     { path: 'login', component: LoginFormComponent },
-    { path: 'courses/:id', component: UeContentPageComponent }
+    { path: 'courses/:id', component: UeContentPageComponent },
+    { path:'courses/:id/post', component : PageCreationModificationComponent}
 
 ];

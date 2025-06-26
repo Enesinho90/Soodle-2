@@ -1,0 +1,31 @@
+<section id="message-file-content">
+  <form  [formGroup]="postForm" id="message-file" >
+
+    <!-- Champ : Titre -->
+    <label for="titre">Titre</label>
+    <input type="text" id="titre" name="titre" placeholder="Entrez le titre du post" formControlName="titre"/>
+
+    <!-- Bloc upload fichier -->
+    <p class="file-upload-label visibleFile">Fichier</p>
+    <div class="custom-file-upload visibleFile">
+      <label id="label_file" for="fichier">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <span>Choisissez un fichier ou glissez-le ici</span>
+      </label>
+      <input type="file" id="fichier" name="fichier" formControlName="fichier"/>
+      <span id="file-name" style="display: none;">
+        <i class="fa-solid fa-file-lines"></i> <span id="file-name-text"></span>
+      </span>
+    </div>
+
+    <!-- Champ : Contenu du message -->
+    <label for="contenu">Contenu du message</label>
+    <textarea id="contenu" name="contenu" placeholder="Écrivez votre message ici..." formControlName="contenu"></textarea>
+
+    <!-- Bouton publier -->
+    <button id="submit-message-file" type="submit">
+      <i class="fa-regular fa-paper-plane"></i>
+      Publier
+    </button>
+  </form>
+</section>
