@@ -7,11 +7,13 @@
     box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-    overflow: hidden;    /* 👉 coupe les scrollbars verticales / horizontales */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    /* 👉 coupe les scrollbars verticales / horizontales */
 
 }
 
@@ -23,6 +25,7 @@ main {
     display: flex;
     height: 100vh;
 }
+
 /* <== fin de section > */
 
 /* <== section : Logo > */
@@ -35,6 +38,7 @@ main {
     object-fit: contain;
     z-index: 1000;
 }
+
 /* <== fin de section > */
 
 /* <== section : Background > */
@@ -47,6 +51,7 @@ main {
     height: 100%;
     object-fit: cover;
 }
+
 /* <== fin de section > */
 
 /* <== section : Contenu login > */
@@ -70,6 +75,7 @@ h1 {
     margin-bottom: 60px;
     font-size: 50px;
 }
+
 /* <== fin de section > */
 
 /* <== section : Formulaire > */
@@ -120,6 +126,7 @@ label {
 .fa-eye-slash {
     cursor: pointer;
 }
+
 /* <== fin de section > */
 
 /* <== section : Bouton > */
@@ -142,13 +149,15 @@ label {
 .button-style:hover {
     background-color: #3a5a40;
 }
+
 /* <== fin de section > */
-a{
+a {
     display: block;
     text-decoration: none;
     color: inherit;
 }
-.information{
+
+.information {
     color: #3A5A40;
     font-weight: bold;
 }
