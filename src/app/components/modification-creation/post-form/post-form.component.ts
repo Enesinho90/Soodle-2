@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup,ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,8 @@ import { FormControl, FormGroup,ReactiveFormsModule } from '@angular/forms';
   styleUrl: './post-form.component.css'
 })
 export class PostFormComponent {
+
+  @Input() selectType: string = 'message'
 
   postForm = new FormGroup({
     titre : new FormControl(''),

@@ -5,7 +5,8 @@
     <label for="titre">Titre</label>
     <input type="text" id="titre" name="titre" placeholder="Entrez le titre du post" formControlName="titre"/>
 
-    <!-- Bloc upload fichier -->
+    @if(selectType === 'partager') {
+      <!-- Bloc upload fichier -->
     <p class="file-upload-label visibleFile">Fichier</p>
     <div class="custom-file-upload visibleFile">
       <label id="label_file" for="fichier">
@@ -17,6 +18,9 @@
         <i class="fa-solid fa-file-lines"></i> <span id="file-name-text"></span>
       </span>
     </div>
+
+    }
+  
 
     <!-- Champ : Contenu du message -->
     <label for="contenu">Contenu du message</label>

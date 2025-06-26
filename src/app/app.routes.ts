@@ -8,7 +8,7 @@ import { ProfilModificationFormComponent } from './forms/profil-modification-for
 import { ProfilPasswordFormComponent } from './forms/profil-password-form/profil-password-form.component';
 import { UserFormComponent } from './forms/user-form/user-form.component';
 import { UeFormComponent } from './forms/ue-form/ue-form.component';
-import { UeContentPageComponent } from './components/ue-content-page/ue-content-page.component';
+import { UeContentPageComponent } from './pages/ue-content-page/ue-content-page.component';
 import { AffectationUeFormComponent } from './forms/affectation-ue-form/affectation-ue-form.component';
 import { ModifyUserFormComponent } from './forms/modify-user-form/modify-user-form.component';
 import { ModifyUeFormComponent } from './forms/modify-ue-form/modify-ue-form.component';
