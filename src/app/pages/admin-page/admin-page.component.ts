@@ -40,4 +40,15 @@ export class AdminPageComponent {
       this.router.navigate(['/admin/add_ue']);
     }
   }
+
+  goToAffectations(id: number) {
+    this.router.navigate(['/admin/affectations', id]);
+  }
+
+  goToModifyUser(id: number) {
+    this.router.navigate(['/admin/modify_user', id]);
+  }
+  goToModifyUe(id: number) {
+    this.router.navigate(['/admin/modify_ue', id]);
+  }
 }

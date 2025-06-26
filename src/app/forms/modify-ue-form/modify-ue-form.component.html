@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()" #profilForm="ngForm">
+    <div class="title">
+        <h1>Modifier une unité d'enseignement</h1>
+    </div>
+
+    <div class="form-input">
+        <label for="code">Code :</label>
+        <input id="code" name="code" [(ngModel)]="code" required (ngModelChange)="updateImageName()" />
+    </div>
+    <br>
+
+    <div class="form-input">
+        <label for="intitule">Intitulé :</label>
+        <input id="intitule" name="intitule" [(ngModel)]="intitule" required />
+    </div>
+    <br>
+    <div class="form-input">
+        <label for="image">Image :</label>
+        <input id="image" name="image" type="file" />
+    </div>
+    <br>
+    <button type="submit">Valider</button>
+</form>

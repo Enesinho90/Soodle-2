@@ -1,0 +1,28 @@
+<form (ngSubmit)="onSubmit()" #profilForm="ngForm">
+    <div class="title">
+        <h1> Formulaire de modification profil</h1>
+    </div>
+
+    <div class="form-input">
+        <label for="nom">Nom :</label>
+        <input id="nom" name="nom" [(ngModel)]="nom" required (ngModelChange)="updateImageName()" />
+    </div>
+    <br>
+
+    <div class="form-input">
+        <label for="prenom">Prénom :</label>
+        <input id="prenom" name="prenom" [(ngModel)]="prenom" required />
+    </div>
+    <br>
+    <div class="form-input">
+        <label for="mail">Mail :</label>
+        <input id="mail" name="mail" type="email" [(ngModel)]="mail" required />
+    </div>
+    <br>
+    <div class="form-input">
+        <label for="image">Image :</label>
+        <input id="image" name="image" type="file" (change)="onFileSelected($event)" />
+    </div>
+    <br>
+    <button type="submit">Valider</button>
+</form>

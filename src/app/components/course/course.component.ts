@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Course } from '../../models/course';
 
 @Component({
@@ -8,4 +9,10 @@ import { Course } from '../../models/course';
 })
 export class CourseComponent {
   @Input() course!: Course;
+
+  constructor(private router: Router) { }
+
+  goToCourse(id: number) {
+    this.router.navigate(['/courses', id]);
+  }
 }
