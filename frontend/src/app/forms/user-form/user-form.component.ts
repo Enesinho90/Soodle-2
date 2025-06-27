@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-user-form',
   imports: [FormsModule, CommonModule],
@@ -9,14 +11,26 @@ import { CommonModule } from '@angular/common';
 })
 export class UserFormComponent {
   nom: string = '';
-  prenom: string = ''
+  prenom: string = '';
   mail: string = '';
   password: string = '';
   role: string[] = [];
+  message: string = '';
+
+  constructor(private authService: AuthService) {}
 
   onSubmit() {
-    // Traitement du formulaire (affichage ou envoi)
-    console.log({ nom: this.nom, prenom: this.prenom, mail: this.mail, password: this.password, role: this.role });
+    const user = {
+      email: this.mail,
+      password: this.password,
+      nom: this.nom,
+      prenom: this.prenom,
+      roles: this.role
+    };
+    this.authService.register(user).subscribe({
+      next: (res: any) => this.message = res.message,
+      error: err => this.message = err.error.message
+    });
   }
 
   updateRole(event: Event) {
@@ -32,5 +46,4 @@ export class UserFormComponent {
       this.role = ['ROLE_ADMIN', 'ROLE_PROFESSEUR'];
     }
   }
-
 }

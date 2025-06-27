@@ -37,4 +37,5 @@
     <br>
 
     <button type="submit" [disabled]="!profilForm.form.valid">Valider</button>
+    <div *ngIf="message" style="margin-top:1em;color:green">{{ message }}</div>
 </form>

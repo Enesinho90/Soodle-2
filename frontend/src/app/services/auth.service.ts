@@ -39,4 +39,8 @@ export class AuthService {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
+
+  register(user: { email: string; password: string; nom: string; prenom: string; roles?: any; }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, user);
+  }
 }
