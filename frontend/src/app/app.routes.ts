@@ -14,23 +14,25 @@ import { ModifyUeFormComponent } from './forms/modify-ue-form/modify-ue-form.com
 import { PageCreationModificationComponent } from './pages/page-creation-modification/page-creation-modification.component';
 import { ParticipantsComponent } from './components/participants/participants.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AffectationGuard } from './guards/affectation.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 
 
 export const routes: Routes = [
-    { path: 'courses', component: CoursesPageComponent, canActivate: [AuthGuard] },
+    { path: 'courses', component: CoursesPageComponent, canActivate: [AuthGuard,] },
     { path: '', redirectTo: 'courses', pathMatch: 'full' },
-    { path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard] },
+    { path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard,AdminGuard] },
     { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginFormComponent },
     { path: 'profil/modifiy', component: ProfilModificationFormComponent, canActivate: [AuthGuard] },
     { path: 'profil/change_password', component: ProfilPasswordFormComponent, canActivate: [AuthGuard] },
-    { path: 'admin/add_user', component: UserFormComponent, canActivate: [AuthGuard] },
-    { path: 'admin/add_ue', component: UeFormComponent, canActivate: [AuthGuard] },
-    { path: 'courses/:id', component: UeContentPageComponent, canActivate: [AuthGuard] },
-    { path: 'courses/:id/post', component: PageCreationModificationComponent, canActivate: [AuthGuard] },
-    { path: 'admin/affectations/:id', component: AffectationUeFormComponent, canActivate: [AuthGuard] },
-    { path: 'admin/modify_user/:id', component: ModifyUserFormComponent, canActivate: [AuthGuard] },
-    { path: 'admin/modify_ue/:id', component: ModifyUeFormComponent, canActivate: [AuthGuard] },
-    { path: 'courses/:id/participants', component: ParticipantsComponent, canActivate: [AuthGuard] }
+    { path: 'admin/add_user', component: UserFormComponent, canActivate: [AuthGuard,AdminGuard] },
+    { path: 'admin/add_ue', component: UeFormComponent, canActivate: [AuthGuard,AdminGuard] },
+    { path: 'courses/:id', component: UeContentPageComponent, canActivate: [AuthGuard,AffectationGuard] },
+    { path: 'courses/:id/post', component: PageCreationModificationComponent, canActivate: [AuthGuard,AffectationGuard] },
+    { path: 'admin/affectations/:id', component: AffectationUeFormComponent, canActivate: [AuthGuard,AdminGuard] },
+    { path: 'admin/modify_user/:id', component: ModifyUserFormComponent, canActivate: [AuthGuard,AdminGuard] },
+    { path: 'admin/modify_ue/:id', component: ModifyUeFormComponent, canActivate: [AuthGuard,AdminGuard] },
+    { path: 'courses/:id/participants', component: ParticipantsComponent, canActivate: [AuthGuard,AffectationGuard] }
 ];

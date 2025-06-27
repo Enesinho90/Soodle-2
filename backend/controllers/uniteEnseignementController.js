@@ -66,3 +66,28 @@ exports.createUe = async (req, res) => {
         res.status(500).json({ error: "Aucune affectation trouvé !" });
     }
 };
+
+
+exports.getUeById = async (req, res) => {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ error: "ID manquant pour récupérer l'unité d'enseignement" });
+    }
+
+    try {
+        const result = await pool.query(
+            'SELECT id, code, intitule, image FROM unite_enseignement WHERE id = $1',
+            [id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: "Unité d'enseignement non trouvée" });
+        }
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Erreur lors de la récupération de l'unité d'enseignement" });
+    }
+};

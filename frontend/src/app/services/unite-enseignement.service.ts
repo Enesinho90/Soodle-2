@@ -32,4 +32,8 @@ export class UniteEnseignementService {
     createUe(ue: Omit<UniteEnseignement, 'id'>): Observable<UniteEnseignement> {
         return this.http.post<UniteEnseignement>(this.apiUrl, ue);
     }
+    getUeById(id: number): Observable<UniteEnseignement> {
+    return this.http.get<UniteEnseignement>(`${this.apiUrl}/${id}`);
+    }
+
 }

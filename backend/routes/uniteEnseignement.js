@@ -10,5 +10,6 @@ router.post('/', uniteEnseignementController.createUe);
 router.put('/updateUe', uniteEnseignementController.updateUe);
 // Supprimer une unité d'enseignement
 router.delete('/:id', uniteEnseignementController.deleteUe);
-
+// recuprer une ue grace à son id
+router.get('/:id', uniteEnseignementController.getUeById);
 module.exports = router;

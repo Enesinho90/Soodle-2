@@ -1,6 +1,9 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
+import { UniteEnseignementService } from '../../services/unite-enseignement.service';
+
 
 @Component({
   selector: 'app-course-header',
@@ -14,12 +17,19 @@ export class CourseHeaderComponent implements OnInit {
   courseId: string | null = null;
   showBackButton = false;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private ueService : UniteEnseignementService ) {
   }
 
   ngOnInit(): void {
     // Récupérer l'ID du cours
-    this.getCourseIdFromUrl();
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.courseId = id;
+    const idAsNumber = Number(id);
+
+    this.ueService.getUeById(idAsNumber).subscribe(myUE => {
+      console.log('UE récupérée :', myUE);
+      this.header_text = myUE.code +" " + myUE.intitule;
+    });
     
     // Définir le texte et la visibilité du bouton retour
     if (this.router.url.includes('/courses/') && this.router.url.includes('/post')) {
@@ -30,7 +40,6 @@ export class CourseHeaderComponent implements OnInit {
       this.showBackButton = true;
     }
     else if (this.router.url.includes('/courses/')) {
-      this.header_text = "WE4E - Web Développement"
       this.showBackButton = false;
     }
   }
