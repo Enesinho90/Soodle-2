@@ -18,6 +18,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);     
 app.use('/api/ues', uniteEnseignementRoutes); // ➕ ajout de la route UE
 app.use('/api/affectations', affectationRoutes); // ➕ ajout de la route affectation
+app.use('/uploads', express.static('uploads'));
 
 
 app.get('/', async (req, res) => {

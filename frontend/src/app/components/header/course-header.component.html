@@ -1,10 +1,19 @@
 <section id="contenu-ue">
-
-    <a href="#">
-      <button class="button-style" type="button">
-        Retour
-      </button>
-    </a>
+    <button 
+      *ngIf="showBackButton"
+      class="button-style" 
+      type="button"
+      (click)="goBack()">
+      Retour
+    </button>
+    
+    <button 
+      *ngIf="!showBackButton"
+      class="button-style" 
+      type="button"
+      (click)="goToCourses()">
+      Retour
+    </button>
+    
     <h1>{{header_text}}</h1>
-
 </section>

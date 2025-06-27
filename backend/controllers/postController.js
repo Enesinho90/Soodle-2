@@ -43,7 +43,7 @@ exports.createPost = async (req, res) => {
     let fichierPath = null;
     
     if (req.file) {
-      fichierNom = req.file.originalname; // Nom original pour affichage
+       fichierNom = req.file.filename; // Nom original pour affichage
       fichierPath = req.file.path; // Chemin de stockage
     }
 
@@ -76,6 +76,21 @@ exports.getPostsByUE = async (req, res) => {
   }
 };
 
+
+
+exports.deletePostById = async (req,res) => {
+  const {idPost} = req.params
+  try {
+    const result = await pool.query(
+      'DELETE FROM post WHERE id = $1;',
+      [idPost]
+    );
+    res.status(200).json({ message: 'Post supprimé avec succès' });
+  } catch (err) {
+    console.error('Erreur deletePostById :', err);
+    res.status(500).json({ error: 'Erreur lors de la suppression du post' });
+  }
+}
 
 
 // Middleware pour l'upload

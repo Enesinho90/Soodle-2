@@ -13,10 +13,13 @@ import { CourseHeaderComponent } from "../../components/header/course-header.com
   styleUrl: './ue-content-page.component.css'
 })
 export class UeContentPageComponent {
-  courseId: string | null = null;
-  courseIdInt = parseInt(this.courseId ?? '', 10)
+  courseId!: string;
 
   constructor(private route: ActivatedRoute) {
-    this.courseId = this.route.snapshot.paramMap.get('id');
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param === null) {
+      throw new Error('Paramètre de route "id" manquant');
+    }
+    this.courseId = param;
   }
 }

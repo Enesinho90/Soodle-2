@@ -3,25 +3,26 @@
     <div class="titre-logo">
       <!-- Icône en fonction du type -->
       <!-- Type 0 = message -->
-      <i class="fa-regular fa-message"></i>
+      <i *ngIf="!post.type" class="fa-regular fa-message"></i>
 
       <!-- Type 1 = fichier -->
-      <!-- Remplacer '#' par le lien du fichier -->
-      <!-- <a href="#"><i class="fa-regular fa-file"></i></a> -->
+      <!-- Icône lien vers le fichier s’il existe et si le type est fichier -->
+      <a *ngIf="post.type && post.fichier" [href]="'http://localhost:3000/uploads/posts/' + post.fichier" target="_blank">
+        <i class="fa-regular fa-file"></i>
+      </a>
+
 
       <h3>{{ post.titre }}</h3>
     </div>
 
     <!-- Bouton de suppression (visible seulement pour les profs) -->
-    
-    <i class="fa-solid fa-xmark"></i>
-    
+    <i class="fa-solid fa-xmark" (click)="deletePost()"></i>
   </div>
 
-  <p>Posté par Jean Dupont le 26/06/2025 à 14:30</p>
+  <p>Posté par {{ user?.prenom }} {{ user?.nom }} le {{ post.date | date: 'dd/MM/yyyy à HH:mm' }}</p>
 
   <div class="contenu-message">
-    {{post.contenu}}
+    {{ post.contenu }}
   </div>
 
   <!-- Bouton modifier (visible seulement pour les profs) -->

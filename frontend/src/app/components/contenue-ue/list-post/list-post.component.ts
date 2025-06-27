@@ -12,14 +12,18 @@ import { PostComponent } from '../post/post.component';
 })
 export class ListPostComponent implements OnInit {
 
-  @Input() ueId!: number; // <-- tu reçois l'ID de l'UE ici
+  @Input() ueUid!: string;     // <-- string reçu en input
+  ueId!: number;               // <-- conversion en number
   posts: any[] = [];
 
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    if (this.ueId) {
+    this.ueId = parseInt(this.ueUid, 10); // conversion string -> number
+    if (!isNaN(this.ueId)) {
       this.loadPosts();
+    } else {
+      console.error('UID non valide :', this.ueUid);
     }
   }
 

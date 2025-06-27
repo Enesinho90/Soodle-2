@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../../../services/post.service';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/user';
@@ -10,7 +11,12 @@ import { User } from '../../../models/user';
   templateUrl: './post-form.component.html',
   styleUrl: './post-form.component.css'
 })
-export class PostFormComponent {
+export class PostFormComponent implements OnInit {
+
+  // ID de l’unité d’enseignement récupéré depuis l’URL
+  uniteEnseignementId: number = 0;
+
+
 
   // Type de post reçu du parent : 'message' ou 'partager'
   @Input() selectType: string = 'message';
@@ -32,8 +38,20 @@ export class PostFormComponent {
 
   constructor(
     private postService: PostService,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get('id');
+      if (idParam) {
+        this.uniteEnseignementId = parseInt(idParam, 10);
+        console.log('UE ID récupéré :', this.uniteEnseignementId);
+      }
+    });
+  }
 
   // Quand l'utilisateur sélectionne un fichier
   onFileSelected(event: Event): void {
@@ -48,7 +66,7 @@ export class PostFormComponent {
   }
 
   // Quand on clique sur "Publier"
-  onSubmit() {
+  onSubmit(): void {
     const user = this.authService.getCurrentUser();
     const utilisateur_id_given = user?.id ?? null;
     const formValues = this.postForm.value;
@@ -56,7 +74,7 @@ export class PostFormComponent {
     // Création de l'objet FormData pour l'envoi du post
     const formData = new FormData();
     formData.append('utilisateur_id', utilisateur_id_given?.toString() || '');
-    formData.append('unite_enseignement_id', '6'); // valeur fixe pour le test //TODO : A remplacer par le réel id de l'ue
+    formData.append('unite_enseignement_id', this.uniteEnseignementId.toString());
     formData.append('type', this.showExtraField.toString());
     formData.append('titre', formValues.titre || '');
     formData.append('contenu', formValues.contenu || '');

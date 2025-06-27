@@ -22,5 +22,9 @@ export class PostService {
   getPostsByUE(ueId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/posts/ue/${ueId}`);
   }
+  deletePost(idPost: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/posts/${idPost}`);
+  }
+
 
 }
