@@ -34,7 +34,4 @@ export const routes: Routes = [
     { path: 'admin/modify_user/:id', component: ModifyUserFormComponent },
     { path: 'admin/modify_ue/:id', component: ModifyUeFormComponent },
     { path: 'courses/:id/participants', component: ParticipantsComponent }
-
-
-
 ];

@@ -161,3 +161,10 @@ a {
     color: #3A5A40;
     font-weight: bold;
 }
+
+/* message d'erreur */
+.error-message {
+    color: red;
+    margin-bottom: 1rem;
+    text-align: center;
+}

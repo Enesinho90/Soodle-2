@@ -18,9 +18,9 @@
     <div class="profil-informations">
         <img class="avatar-onclick" src="images/avatar/avatar.jpg" alt="avatar">
         <div class="person">
-            <p class="username">Nom Prenom </p>
-            <p class="usermail"> Mail</p>
-            <p class="userrole"> Role</p>
+            <p class="username">{{user.nom | uppercase}} {{user.prenom }}</p>
+            <p class="usermail"> {{user.email }}</p>
+            <p class="userrole"> {{user.roles }}</p>
         </div>
     </div>
     <hr>

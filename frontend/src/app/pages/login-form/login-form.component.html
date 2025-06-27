@@ -2,7 +2,7 @@
   <section class="login">
     <img class="Soodle-logo" src="/images/login/logo.png" />
     <p class="slogan">Ta plateforme, ton savoir, ton avenir.</p>
-    
+
     <form [formGroup]="loginForm" id="login-form">
       <h1>Connecte-toi à Soodle</h1>
 
@@ -18,7 +18,9 @@
         <i class="fa-regular fa-eye"></i>
         <i class="fa-eye-slash hiddeneye"></i>
       </div>
-
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
       <button class="button-style" type="submit" (click)="allerAuDashboard()">
         Connexion
       </button>
@@ -26,7 +28,7 @@
   </section>
 
   <div class="background">
-    <img src="/images/login/background.png"/>
+    <img src="/images/login/background.png" />
   </div>
-  
+
 </main>

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +12,15 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 })
 
 export class NavbarComponent {
+  constructor(private authService: AuthService) { }
 
   isProfileInformationsVisible = false;
-  
+
+  user: any;
+
+  ngOnInit() {
+    this.user = this.authService.getCurrentUser();
+  }
 
 
   togglePopup() {
