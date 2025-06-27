@@ -49,3 +49,20 @@ exports.deleteUe = async (req, res) => {
         res.status(500).json({ error: "Erreur lors de la suppression de l'unité d'enseignement" });
     }
 };
+
+exports.createUe = async (req, res) => {
+    const { code, intitule, image } = req.body;
+    if (!code || !intitule || !image) {
+        return res.status(400).json({ error: 'Champs manquants pour la création de l\'UE' });
+    }
+    try {
+        const result = await pool.query(
+            'INSERT INTO unite_enseignement (code, intitule, image) VALUES ($1, $2, $3) RETURNING *',
+            [code, intitule, image]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Aucune affectation trouvé !" });
+    }
+};
