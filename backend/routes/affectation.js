@@ -1,22 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const affectationController = require('../controllers/affectationController');
+const { getAllAffectations, getAffectationsByUserId, getUesByUserId, createAffectation, deleteAffectation, getUsersByCourseId, getAdminAndProfByCourseId, getAffectationsEtudiantsByCourseId, getEtudiantsByCourseId } = require('../controllers/affectationController');
 
 // Récupérer toutes les affectations
-router.get('/', affectationController.getAllAffectations);
+router.get('/', getAllAffectations);
 
 // Récupérer les affectations d'un utilisateur
-router.get('/user/:id', affectationController.getAffectationsByUserId);
+router.get('/user/:id', getAffectationsByUserId);
 
 // Récupérer toutes les UE d'un utilisateur via les affectations
-router.get('/user/:id/ues', affectationController.getUesByUserId);
+router.get('/user/:id/ues', getUesByUserId);
 
 // Créer une affectation entre un utilisateur et une UE
-router.post('/', affectationController.createAffectation);
+router.post('/', createAffectation);
 
 // Supprimer une affectation entre un utilisateur et une UE
-router.delete('/:utilisateur_id/:unite_enseignement_id', affectationController.deleteAffectation);
+router.delete('/:utilisateur_id/:unite_enseignement_id', deleteAffectation);
 
-// (Tu pourras ajouter ici PUT selon les besoins)
+// Récupérer les profs/admins affectés à un cours
+router.get('/users-by-course/:id', getAdminAndProfByCourseId);
+
+// Récupérer les affectations des étudiants d'un cours
+router.get('/etudiants-by-course/:id', getAffectationsEtudiantsByCourseId);
+
+// Récupérer les utilisateurs ayant uniquement le rôle ROLE_USER pour un cours donné
+router.get('/etudiants-users-by-course/:id', getEtudiantsByCourseId);
 
 module.exports = router;

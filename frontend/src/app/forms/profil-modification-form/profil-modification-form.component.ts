@@ -16,12 +16,14 @@ export class ProfilModificationFormComponent {
   image: string = '';
   selectedFile: File | null = null;
   message: string = '';
+  id: number | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     const user = this.authService.getCurrentUser();
     if (user) {
+      this.id = user.id;
       this.nom = user.nom;
       this.prenom = user.prenom;
       this.mail = user.email;
@@ -50,7 +52,7 @@ export class ProfilModificationFormComponent {
     if (this.selectedFile) {
       const fileName = this.selectedFile.name;
       const extension = fileName.substring(fileName.lastIndexOf('.') + 1);
-      const avatarName = `${this.nom}_${this.prenom}.${extension}`;
+      const avatarName = `avatar_${this.id}.${extension}`;
       const formData = new FormData();
       formData.append('id', user.id.toString());
       formData.append('nom', this.nom);

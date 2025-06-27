@@ -12,4 +12,8 @@ export class CourseService {
     getCourses(): Course[] {
         return this.courses;
     }
+
+    getCourseById(id: number): Course | undefined {
+        return this.courses.find(c => c.id === id);
+    }
 }

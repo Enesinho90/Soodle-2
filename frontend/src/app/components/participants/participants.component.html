@@ -3,34 +3,57 @@
         <app-course-header></app-course-header>
 
         <div class="title">
-            <h1>XX - INTULEBLABLABLA</h1>
+            <h1>{{cours?.code }} - {{cours?.intitule }}</h1>
         </div>
         <div class="container-participants">
+            <!-- Tableau des Professeurs (et Administrateurs) -->
+            <p class="title2">Professeurs (et Administrateurs)</p>
+            <table id="users">
 
+                @if (profs.length > 0) {
+                @for (prof of profs; track prof) {
+                <tr>
+                    <td><img class="image-table" [src]="'http://localhost:3000/uploads/' + prof.avatar" alt="Avatar">
+                    </td>
+                    <td>{{prof.prenom}} {{prof.nom}}</td>
+                    <td>{{prof.roles}}</td>
+                    <td><a [href]="'mailto:' + prof.email">{{prof.email}}</a></td>
+                </tr>
+                }
+                } @else {
+                <tr>
+                    <td colspan="4">Aucun professeur ou administrateur affecté à ce cours.</td>
+                </tr>
+                }
+            </table>
         </div>
 
-        <!-- Tableau des Professeurs (et Administrateurs) -->
-        <p class="title2">Professeurs (et Administrateurs)</p>
-        <table id="users">
 
-            <tr>
-                <td><img class="image-table" src=""></td>
-                <td>NOM PRENOM</td>
-                <td>ADMINISTRATEUR</td>
-                <td><a href="mailto:">EMAIL</a></td>
-            </tr>
-
-        </table>
 
         <!-- Tableau des Etudiants -->
         <p class="title2">Etudiants</p>
         <table id="users">
             <tr>
-                <td><img class="image-table" src=""></td>
-                <td>NOM PRENOM</td>
-                <td>ETUDIANT</td>
-                <td><a href="mailto:">EMAIL</a></td>
+                <th>Avatar</th>
+                <th>Nom Prénom</th>
+                <th>Rôle</th>
+                <th>Email</th>
             </tr>
+            @if (etudiants.length > 0) {
+            @for (etudiant of etudiants; track etudiant) {
+            <tr>
+                <td><img class="image-table" [src]="'http://localhost:3000/uploads/' + etudiant.avatar" alt="Avatar">
+                </td>
+                <td>{{etudiant.prenom}} {{etudiant.nom}}</td>
+                <td>ETUDIANT</td>
+                <td><a [href]="'mailto:' + etudiant.email">{{etudiant.email}}</a></td>
+            </tr>
+            }
+            } @else {
+            <tr>
+                <td colspan="4">Aucun étudiant affecté à ce cours.</td>
+            </tr>
+            }
         </table>
     </div>
 

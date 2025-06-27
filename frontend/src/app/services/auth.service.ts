@@ -86,4 +86,25 @@ export class AuthService {
   getUserById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/user/${id}`);
   }
+
+  getUsersByCourseId(courseId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl.replace('/auth', '/affectations')}/users-by-course/${courseId}`);
+  }
+
+  /**
+   * Récupère tous les professeurs, admins et admin/professeurs affectés à un cours donné
+   * @param courseId id du cours (unite_enseignement_id)
+   */
+  getAdminAndProfByCourseId(courseId: number): Observable<any[]> {
+    // Correction de l'URL pour correspondre à la route backend
+    return this.http.get<any[]>(`http://localhost:3000/api/affectations/users-by-course/${courseId}`);
+  }
+
+  /**
+   * Récupère tous les utilisateurs ayant uniquement le rôle ROLE_USER affectés à un cours donné
+   * @param courseId id du cours (unite_enseignement_id)
+   */
+  getEtudiantsByCourseId(courseId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:3000/api/affectations/etudiants-users-by-course/${courseId}`);
+  }
 }

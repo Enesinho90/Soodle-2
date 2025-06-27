@@ -7,6 +7,8 @@ const upload = multer({ dest: 'uploads/' }); // dossier où seront stockées les
 
 // Récupérer toutes les unités d'enseignement
 router.get('/', uniteEnseignementController.getAllUes);
+// Récupérer une unité d'enseignement par son id
+router.get('/:id', uniteEnseignementController.getUeById);
 // Pour la création d'une UE avec image
 router.post('/', upload.single('image'), uniteEnseignementController.createUe);
 // Modifier une unité d'enseignement (accepte aussi un fichier)
