@@ -150,32 +150,43 @@ input[type="file"]::file-selector-button {
 }
 
 .success-message {
-  background: #e6ffe6;
-  color: #207520;
-  border: 1px solid #b2e6b2;
-  padding: 8px 16px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(32, 117, 32, 0.08);
-  animation: fadeInOut 3s linear;
+    background: #e6ffe6;
+    color: #207520;
+    border: 1px solid #b2e6b2;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(32, 117, 32, 0.08);
+    animation: fadeInOut 3s linear;
 }
 
 .error-message {
-  background: #ffe6e6;
-  color: #a10000;
-  border: 1px solid #e6b2b2;
-  padding: 8px 16px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(161, 0, 0, 0.08);
-  animation: fadeInOut 4s linear;
+    background: #ffe6e6;
+    color: #a10000;
+    border: 1px solid #e6b2b2;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(161, 0, 0, 0.08);
+    animation: fadeInOut 4s linear;
 }
 
 @keyframes fadeInOut {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

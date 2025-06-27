@@ -6,17 +6,20 @@
                 Mes cours
             </a>
         </p>
+        @if (user.roles.includes('ROLE_ADMIN')) {
         <p class="pages-navbar"> <a class="link-to-page" routerLink="/admin"> Admin </a>
         </p>
+        }
     </div>
     <div class="navbar-right">
         <i class="fa-regular fa-bell"></i>
-        <img id="profil-picture" (click)="togglePopup()" class="avatar" src="images/avatar/avatar.jpg" alt="avatar">
+        <img id="profil-picture" (click)="togglePopup()" class="avatar"
+            [src]="'http://localhost:3000/uploads/' + user.avatar" alt="avatar">
     </div>
 </div>
 <div id="profil-popup" *ngIf="isProfileInformationsVisible">
     <div class="profil-informations">
-        <img class="avatar-onclick" src="images/avatar/avatar.jpg" alt="avatar">
+        <img class="avatar-onclick" [src]="'http://localhost:3000/uploads/' + user.avatar" alt="avatar">
         <div class="person">
             <p class="username">{{user.nom | uppercase}} {{user.prenom }}</p>
             <p class="usermail"> {{user.email }}</p>

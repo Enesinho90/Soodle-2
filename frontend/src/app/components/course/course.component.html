@@ -1,7 +1,7 @@
 <div id="margin-top">
     <div class="course"><a (click)="goToCourse(course.id)">
 
-            <img class="course-pic" src="images/cours/{{course.imageUrl}}" alt="Image du cours">
+            <img class="course-pic" [src]="'http://localhost:3000/uploads/' + course.image" alt="Image du cours">
             <div class="course-description">
                 <p>
                     {{course.code}} : {{course.intitule}}

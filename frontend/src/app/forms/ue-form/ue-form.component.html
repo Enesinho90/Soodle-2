@@ -16,9 +16,13 @@
         <input id="intitule" name="intitule" [(ngModel)]="intitule" required />
     </div>
     <br>
-    <div class="form-input">
+    <div class="form-group form-input">
         <label for="image">Image :</label>
-        <input id="image" name="image" type="file" />
+        <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
     </div>
     <br>
     <button type="submit">Valider</button>

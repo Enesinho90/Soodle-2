@@ -18,6 +18,7 @@ export class ModifyUserFormComponent {
   message: string = '';
   id: number | null = null;
   selectedRole: string = '';
+  selectedFile: File | null = null;
 
   constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
@@ -51,21 +52,56 @@ export class ModifyUserFormComponent {
     }
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    } else {
+      this.selectedFile = null;
+    }
+  }
+
   onSubmit() {
     if (!this.id) {
       this.message = "ID utilisateur manquant.";
       return;
     }
-    this.authService.updateProfileAdmin({
-      id: this.id,
-      nom: this.nom,
-      prenom: this.prenom,
-      email: this.mail,
-      roles: this.role
-    }).subscribe({
-      next: (res: any) => this.message = res.message,
-      error: err => this.message = err.error.message
-    });
+    if (this.selectedFile) {
+      const fileName = this.selectedFile.name;
+      const extension = fileName.substring(fileName.lastIndexOf('.') + 1);
+      const avatarName = `${this.nom}_${this.prenom}.${extension}`;
+      const formData = new FormData();
+      formData.append('id', this.id.toString());
+      formData.append('nom', this.nom);
+      formData.append('prenom', this.prenom);
+      formData.append('mail', this.mail);
+      formData.append('role', this.selectedRole);
+      formData.append('avatar', this.selectedFile, avatarName);
+      // Appel du service de modification utilisateur AVEC upload image
+      this.authService.updateProfileAdmin(formData).subscribe({
+        next: (res: any) => {
+          this.message = res.message;
+          this.selectedFile = null;
+          setTimeout(() => { this.message = ''; }, 3000);
+        },
+        error: err => {
+          this.message = err.error.message;
+          setTimeout(() => { this.message = ''; }, 3000);
+        }
+      });
+    } else {
+      // Modification classique SANS upload image (l'avatar reste inchangé)
+      this.authService.updateProfileAdmin({
+        id: this.id,
+        nom: this.nom,
+        prenom: this.prenom,
+        email: this.mail,
+        roles: this.role
+      }).subscribe({
+        next: (res: any) => this.message = res.message,
+        error: err => this.message = err.error.message
+      });
+    }
   }
 
   updateRole(event: Event) {

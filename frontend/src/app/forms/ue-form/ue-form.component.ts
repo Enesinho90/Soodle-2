@@ -16,20 +16,47 @@ export class UeFormComponent {
   image: string = '';
   selectedFile: File | null = null;
   successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(private ueService: UniteEnseignementService, private router: Router) { }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      this.errorMessage = '';
+    } else {
+      this.selectedFile = null;
+    }
+  }
+
   onSubmit() {
-    this.ueService.createUe({ code: this.code, intitule: this.intitule, image: this.image }).subscribe({
+    if (!this.selectedFile) {
+      this.errorMessage = 'Veuillez sélectionner une image.';
+      return;
+    }
+    // Récupérer l'extension du fichier
+    const fileName = this.selectedFile.name;
+    const extension = fileName.substring(fileName.lastIndexOf('.') + 1);
+    const imageName = `${this.code}.${extension}`;
+
+    const formData = new FormData();
+    formData.append('code', this.code);
+    formData.append('intitule', this.intitule);
+    formData.append('image', this.selectedFile);
+    formData.append('imageName', imageName); // On envoie le nom souhaité au backend
+
+    this.ueService.createUe(formData).subscribe({
       next: () => {
-        this.successMessage = 'Unité d\'enseignement créée avec succès !';
+        this.successMessage = "Unité d'enseignement créée avec succès !";
         this.code = '';
         this.intitule = '';
         this.image = '';
+        this.selectedFile = null;
         setTimeout(() => { this.successMessage = ''; }, 3000);
       },
       error: () => {
-        alert('Erreur lors de la création de l\'UE');
+        alert("Erreur lors de la création de l'UE");
       }
     });
   }
