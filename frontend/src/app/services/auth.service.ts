@@ -56,4 +56,16 @@ export class AuthService {
   changePassword(data: { id: number; oldPassword: string; newPassword: string }): Observable<any> {
     return this.http.put(`${this.apiUrl}/change-password`, data);
   }
+
+  updateProfileAdmin(user: { id: number; nom: string; prenom: string; email: string; roles: any }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update-profil-admin`, user);
+  }
+
+  getAllUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/users`);
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`${this.apiUrl}/user/${id}`);
+  }
 }

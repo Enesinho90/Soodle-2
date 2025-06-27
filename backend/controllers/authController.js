@@ -97,6 +97,7 @@ exports.updateProfile = async (req, res) => {
         console.error(err);
         res.status(500).json({ message: "Erreur serveur lors de la modification du profil" });
     }
+
 };
 
 exports.changePassword = async (req, res) => {
@@ -121,5 +122,55 @@ exports.changePassword = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Erreur serveur lors du changement de mot de passe" });
+    }
+};
+
+exports.updateProfileAdmin = async (req, res) => {
+    const { id, nom, prenom, email, roles } = req.body;
+    try {
+        // Vérifier si l'email est déjà utilisé par un autre utilisateur
+        const emailExists = await pool.query('SELECT id FROM utilisateur WHERE email = $1 AND id != $2', [email, id]);
+        if (emailExists.rows.length > 0) {
+            return res.status(400).json({ message: 'Cet email est déjà utilisé par un autre utilisateur.' });
+        }
+        // Mettre à jour le profil et les rôles
+        const result = await pool.query(
+            'UPDATE utilisateur SET nom = $1, prenom = $2, email = $3, roles = $4 WHERE id = $5 RETURNING id, email, nom, prenom, roles, avatar',
+            [nom, prenom, email, JSON.stringify(roles), id]
+        );
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+        }
+        res.json({
+            message: 'Profil mis à jour avec succès',
+            user: result.rows[0]
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erreur serveur lors de la modification admin du profil" });
+    }
+};
+
+exports.getAllUsers = async (req, res) => {
+    try {
+        const result = await pool.query('SELECT id, email, nom, prenom, roles, avatar FROM utilisateur');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erreur serveur lors de la récupération des utilisateurs" });
+    }
+};
+
+exports.deleteUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await pool.query('DELETE FROM utilisateur WHERE id = $1 RETURNING id', [id]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+        }
+        res.json({ message: 'Utilisateur supprimé avec succès', id: result.rows[0].id });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erreur serveur lors de la suppression de l'utilisateur" });
     }
 };

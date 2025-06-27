@@ -20,7 +20,7 @@
     <br>
     <div class="form-input">
         <label for="role">Rôle :</label>
-        <select id="role" name="role" (change)="updateRole($event)" required>
+        <select id="role" name="role" (change)="updateRole($event)" [(ngModel)]="selectedRole" required>
             <option value="">Sélectionner un rôle</option>
             <option value="etudiant">Étudiant</option>
             <option value="professeur">Professeur</option>
@@ -30,5 +30,10 @@
     </div>
     <br>
 
+    <div *ngIf="(!nom || !prenom || !mail || !selectedRole) && profilForm.submitted" class="error" style="color:red">
+        Tous les champs doivent être renseignés et un rôle doit être sélectionné.
+    </div>
+
     <button type="submit" [disabled]="!profilForm.form.valid">Valider</button>
+    <div *ngIf="message" style="margin-top:1em;color:green">{{ message }}</div>
 </form>
