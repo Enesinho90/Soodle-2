@@ -3,14 +3,17 @@ const cors = require('cors');
 const pool = require('./models/db');
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth'); // ✅ ici on importe le fichier auth.js
+const authRoutes = require('./routes/auth');
+const postRoutes = require('./routes/post'); 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ➕ on ajoute cette ligne pour utiliser la route de login :
 app.use('/api/auth', authRoutes);
+app.use('/api/posts', postRoutes);     
+
+
 
 app.get('/', async (req, res) => {
     try {

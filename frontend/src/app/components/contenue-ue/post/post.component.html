@@ -9,7 +9,7 @@
       <!-- Remplacer '#' par le lien du fichier -->
       <!-- <a href="#"><i class="fa-regular fa-file"></i></a> -->
 
-      <h3>Titre du post</h3>
+      <h3>{{ post.titre }}</h3>
     </div>
 
     <!-- Bouton de suppression (visible seulement pour les profs) -->
@@ -21,7 +21,7 @@
   <p>Posté par Jean Dupont le 26/06/2025 à 14:30</p>
 
   <div class="contenu-message">
-    Ceci est un exemple de contenu de post. Il peut contenir du texte, des liens, etc.
+    {{post.contenu}}
   </div>
 
   <!-- Bouton modifier (visible seulement pour les profs) -->

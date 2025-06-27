@@ -5,7 +5,7 @@ async function createUser() {
     const email = 'enes@ap.com';
     const password = 'azerty123';
     const nom = 'UZUN';
-    const prenom = 'Enes';
+    const prenom = 'enes';
     const avatar = 'profil-enes.jpg';
     const roles = JSON.stringify(["ROLE_ADMIN", "ROLE_PROF"]);
 

@@ -107,13 +107,12 @@
     transition: all 0.3s ease-in-out;
 }
 
-
-
-
-
-
 #submit-message-file:hover {
     background-color: #3a5a40;
 }
 
-
+.file-selected-msg {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #3a5a40;
+}

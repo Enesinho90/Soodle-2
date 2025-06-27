@@ -1,5 +1,5 @@
 <section id="message-file-content">
-  <form  [formGroup]="postForm" id="message-file" >
+  <form  [formGroup]="postForm" id="message-file" (ngSubmit)="onSubmit()">
 
     <!-- Champ : Titre -->
     <label for="titre">Titre</label>
@@ -13,15 +13,15 @@
         <i class="fa-solid fa-cloud-arrow-up"></i>
         <span>Choisissez un fichier ou glissez-le ici</span>
       </label>
-      <input type="file" id="fichier" name="fichier" formControlName="fichier"/>
-      <span id="file-name" style="display: none;">
-        <i class="fa-solid fa-file-lines"></i> <span id="file-name-text"></span>
-      </span>
+      <input type="file" id="fichier" name="fichier"(change)="onFileSelected($event)"/>
+        @if(fichierSelectionne) {
+           <span class="file-selected-msg">
+            Fichier sélectionné !
+          </span>
+        }
     </div>
-
     }
   
-
     <!-- Champ : Contenu du message -->
     <label for="contenu">Contenu du message</label>
     <textarea id="contenu" name="contenu" placeholder="Écrivez votre message ici..." formControlName="contenu"></textarea>
