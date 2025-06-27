@@ -28,4 +28,8 @@ export class UniteEnseignementService {
     deleteUe(id: number): Observable<any> {
         return this.http.delete<any>(`${this.apiUrl}/${id}`);
     }
+
+    createUe(ue: Omit<UniteEnseignement, 'id'>): Observable<UniteEnseignement> {
+        return this.http.post<UniteEnseignement>(this.apiUrl, ue);
+    }
 }

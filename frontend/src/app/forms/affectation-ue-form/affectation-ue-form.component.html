@@ -1,12 +1,15 @@
-<form>
+<form (ngSubmit)="onSubmit($event)">
     <div class="title">
-        <h1>Affecter une unité d'enseignement à {{user.nom | uppercase }} {{user.prenom}}</h1>
+        <h1 *ngIf="user">Affecter une unité d'enseignement à {{user.nom | uppercase }} {{user.prenom}}</h1>
     </div>
     <div id="container">
         Cours déjà suivies :
         <span class="codeUe">
-            COURS 1 COURS 2 COURS 3 BLABLABLA
+            @for (ue of uesAffectees; track ue; let last = $last) {
+            {{ ue.code }}@if (!last) {, }
+            }
         </span>
+
 
     </div>
 
@@ -18,16 +21,23 @@
     <div class="form-input">
         <div>
             <label for="ue">Unités d'enseignement :</label>
-            <select id="ue" name="ue">
-                <option value="ue1">UE 1</option>
-                <option value="ue2">UE 2</option>
-                <option value="ue3">UE 3</option>
-                <option value="ue4">UE 4</option>
+            <select id="ue" name="ue" (change)="onUeChange($event)">
+                <option [value]="null" disabled selected>Choisir une UE</option>
+                <option *ngFor="let ue of coursesAvailable" [value]="ue.id">{{ ue.code }} - {{ ue.intitule }}</option>
             </select>
         </div>
 
     </div>
 
     <br>
-    <button type="submit" class="btn" id="actionButton">Ajouter</button>
+    <!-- Remplace le bouton submit par un bouton classique -->
+    <button type="button" [ngClass]="buttonClass" id="actionButton" (click)="onSubmit($event)">{{ buttonLabel
+        }}</button>
+
+    <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
 </form>

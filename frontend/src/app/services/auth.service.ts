@@ -40,6 +40,11 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
+  getCurrentId(): number | null {
+    const user = this.getCurrentUser();
+    return user && user.id ? user.id : null;
+  }
+
   register(user: { email: string; password: string; nom: string; prenom: string; roles?: any; }): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user);
   }

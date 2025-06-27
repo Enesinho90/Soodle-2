@@ -4,6 +4,8 @@ const uniteEnseignementController = require('../controllers/uniteEnseignementCon
 
 // Récupérer toutes les unités d'enseignement
 router.get('/', uniteEnseignementController.getAllUes);
+// Créer une unité d'enseignement
+router.post('/', uniteEnseignementController.createUe);
 // Modifier une unité d'enseignement
 router.put('/updateUe', uniteEnseignementController.updateUe);
 // Supprimer une unité d'enseignement

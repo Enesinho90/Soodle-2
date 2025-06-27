@@ -46,14 +46,20 @@ button {
     color: #000000;
 }
 
-.btn {
-    max-width: 350px;
-    padding: 15px;
-    font-size: 22px;
-    border-radius: 10px;
-    border: solid 1px #A3B18A;
-    background-color: #A3B18A;
-    color: #000000;
+.btn-danger {
+    background-color: #ffb3b3 !important;
+    /* rouge clair */
+    color: #a10000 !important;
+    border: 1px solid #ffb3b3 !important;
+    transition: background 0.2s;
+}
+
+.btn-danger:hover {
+    background-color: #d32f2f !important;
+    /* rouge foncé */
+    color: #fff !important;
+    border: 1px solid #ffb3b3 !important;
+
 }
 
 input {
@@ -141,4 +147,35 @@ input[type="file"]::file-selector-button {
 
 #image {
     max-width: 431px;
+}
+
+.success-message {
+  background: #e6ffe6;
+  color: #207520;
+  border: 1px solid #b2e6b2;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(32, 117, 32, 0.08);
+  animation: fadeInOut 3s linear;
+}
+
+.error-message {
+  background: #ffe6e6;
+  color: #a10000;
+  border: 1px solid #e6b2b2;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(161, 0, 0, 0.08);
+  animation: fadeInOut 4s linear;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
 }
