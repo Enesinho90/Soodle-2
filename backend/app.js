@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const authRoutes = require('./routes/auth'); // ✅ ici on importe le fichier auth.js
 const uniteEnseignementRoutes = require('./routes/uniteEnseignement'); // ➕ import de la route UE
+const affectationRoutes = require('./routes/affectation'); // ➕ import de la route affectation
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,7 @@ app.use(express.json());
 // ➕ on ajoute cette ligne pour utiliser la route de login :
 app.use('/api/auth', authRoutes);
 app.use('/api/ues', uniteEnseignementRoutes); // ➕ ajout de la route UE
+app.use('/api/affectations', affectationRoutes); // ➕ ajout de la route affectation
 
 app.get('/', async (req, res) => {
     try {

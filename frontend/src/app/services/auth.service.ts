@@ -68,4 +68,8 @@ export class AuthService {
   deleteUser(id: number) {
     return this.http.delete(`${this.apiUrl}/user/${id}`);
   }
+
+  getUserById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/user/${id}`);
+  }
 }
