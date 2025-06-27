@@ -49,20 +49,29 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, user);
   }
 
-  updateProfile(user: { id: number; nom: string; prenom: string; email: string }): Observable<any> {
-    return this.http.put(`${this.apiUrl}/profile`, user).pipe(
-      tap((response: any) => {
-        // Met à jour le user dans le localStorage si c'est l'utilisateur courant
-        localStorage.setItem('user', JSON.stringify(response.user));
-      })
-    );
+  updateProfile(user: { id: number; nom: string; prenom: string; email: string } | FormData): Observable<any> {
+    // Si c'est un FormData (upload image), on utilise PUT avec multipart
+    if (user instanceof FormData) {
+      return this.http.put(`${this.apiUrl}/profile`, user).pipe(
+        tap((response: any) => {
+          localStorage.setItem('user', JSON.stringify(response.user));
+        })
+      );
+    } else {
+      // Sinon, on fait comme avant
+      return this.http.put(`${this.apiUrl}/profile`, user).pipe(
+        tap((response: any) => {
+          localStorage.setItem('user', JSON.stringify(response.user));
+        })
+      );
+    }
   }
 
   changePassword(data: { id: number; oldPassword: string; newPassword: string }): Observable<any> {
     return this.http.put(`${this.apiUrl}/change-password`, data);
   }
 
-  updateProfileAdmin(user: { id: number; nom: string; prenom: string; email: string; roles: any }): Observable<any> {
+  updateProfileAdmin(user: { id: number; nom: string; prenom: string; email: string; roles: any; } | FormData): Observable<any> {
     return this.http.put(`${this.apiUrl}/update-profil-admin`, user);
   }
 

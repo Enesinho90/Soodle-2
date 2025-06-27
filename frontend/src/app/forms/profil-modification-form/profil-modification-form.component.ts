@@ -47,14 +47,37 @@ export class ProfilModificationFormComponent {
       this.message = "Utilisateur non connecté.";
       return;
     }
-    this.authService.updateProfile({
-      id: user.id,
-      nom: this.nom,
-      prenom: this.prenom,
-      email: this.mail
-    }).subscribe({
-      next: (res: any) => this.message = res.message,
-      error: err => this.message = err.error.message
-    });
+    if (this.selectedFile) {
+      const fileName = this.selectedFile.name;
+      const extension = fileName.substring(fileName.lastIndexOf('.') + 1);
+      const avatarName = `${this.nom}_${this.prenom}.${extension}`;
+      const formData = new FormData();
+      formData.append('id', user.id.toString());
+      formData.append('nom', this.nom);
+      formData.append('prenom', this.prenom);
+      formData.append('mail', this.mail);
+      formData.append('avatar', this.selectedFile, avatarName);
+      this.authService.updateProfile(formData).subscribe({
+        next: (res: any) => {
+          this.message = res.message;
+          this.selectedFile = null;
+          setTimeout(() => { this.message = ''; }, 3000);
+        },
+        error: err => {
+          this.message = err.error.message;
+          setTimeout(() => { this.message = ''; }, 3000);
+        }
+      });
+    } else {
+      this.authService.updateProfile({
+        id: user.id,
+        nom: this.nom,
+        prenom: this.prenom,
+        email: this.mail
+      }).subscribe({
+        next: (res: any) => this.message = res.message,
+        error: err => this.message = err.error.message
+      });
+    }
   }
 }

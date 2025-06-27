@@ -74,14 +74,30 @@ exports.register = async (req, res) => {
 };
 
 exports.updateProfile = async (req, res) => {
-    const { id, nom, prenom, email } = req.body;
     try {
+        let { id, nom, prenom, mail } = req.body;
+        // Correction : certains navigateurs envoient 'email', d'autres 'mail'
+        const email = mail || req.body.email;
+        // Si un fichier est uploadé
+        let avatarFileName = null;
+        if (req.file) {
+            const extension = req.file.originalname.split('.').pop();
+            avatarFileName = `avatar_${id}.${extension}`;
+            const fs = require('fs');
+            const path = require('path');
+            const oldPath = req.file.path;
+            const newPath = path.join('uploads', avatarFileName);
+            // Renommer le fichier uploadé
+            fs.renameSync(oldPath, newPath);
+            // Mettre à jour l'avatar en BDD
+            await pool.query('UPDATE utilisateur SET avatar = $1 WHERE id = $2', [avatarFileName, id]);
+        }
         // Vérifier si l'email est déjà utilisé par un autre utilisateur
         const emailExists = await pool.query('SELECT id FROM utilisateur WHERE email = $1 AND id != $2', [email, id]);
         if (emailExists.rows.length > 0) {
             return res.status(400).json({ message: 'Cet email est déjà utilisé par un autre utilisateur.' });
         }
-        // Mettre à jour le profil
+        // Mettre à jour le profil (hors avatar)
         const result = await pool.query(
             'UPDATE utilisateur SET nom = $1, prenom = $2, email = $3 WHERE id = $4 RETURNING id, email, nom, prenom, roles, avatar',
             [nom, prenom, email, id]
@@ -90,14 +106,13 @@ exports.updateProfile = async (req, res) => {
             return res.status(404).json({ message: 'Utilisateur non trouvé.' });
         }
         res.json({
-            message: 'Profil mis à jour avec succès',
+            message: avatarFileName ? 'Profil et avatar mis à jour avec succès' : 'Profil mis à jour avec succès',
             user: result.rows[0]
         });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Erreur serveur lors de la modification du profil" });
     }
-
 };
 
 exports.changePassword = async (req, res) => {

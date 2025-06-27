@@ -1,4 +1,6 @@
 const pool = require('../models/db');
+const fs = require('fs');
+const path = require('path');
 
 // Contrôleur pour les unités d'enseignement (optionnel si logique complexe à ajouter plus tard)
 // Pour l'instant, la logique est directement dans la route.
@@ -14,22 +16,58 @@ exports.getAllUes = async (req, res) => {
 };
 
 exports.updateUe = async (req, res) => {
-    const { id, code, intitule, image } = req.body;
-    if (!id || !code || !intitule || !image) {
-        return res.status(400).json({ error: 'Champs manquants pour la modification de l\'UE' });
-    }
-    try {
-        const result = await pool.query(
-            'UPDATE unite_enseignement SET code = $1, intitule = $2, image = $3 WHERE id = $4 RETURNING *',
-            [code, intitule, image, id]
-        );
-        if (result.rowCount === 0) {
-            return res.status(404).json({ error: 'Unité d\'enseignement non trouvée' });
+    // Si c'est un form-data (upload), req.file existe
+    console.log('Fichier reçu pour modification :', req.file);
+    if (req.file) {
+        const { id, code, intitule, imageName } = req.body;
+        if (!id || !code || !intitule) {
+            return res.status(400).json({ error: 'Champs manquants pour la modification de l\'UE' });
         }
-        res.json(result.rows[0]);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Erreur lors de la modification de l'unité d'enseignement" });
+        // Renommage du fichier uploadé avec le nom souhaité
+        const extension = path.extname(req.file.originalname);
+        const newFileName = imageName || req.file.filename + extension;
+        const oldPath = req.file.path;
+        const newPath = path.join(path.dirname(oldPath), newFileName);
+        let image = null;
+        try {
+            fs.renameSync(oldPath, newPath);
+            image = newFileName;
+        } catch (err) {
+            console.error('Erreur lors du renommage du fichier :', err);
+            return res.status(500).json({ error: "Erreur lors du traitement de l'image" });
+        }
+        try {
+            const result = await pool.query(
+                'UPDATE unite_enseignement SET code = $1, intitule = $2, image = $3 WHERE id = $4 RETURNING *',
+                [code, intitule, image, id]
+            );
+            if (result.rowCount === 0) {
+                return res.status(404).json({ error: 'Unité d\'enseignement non trouvée' });
+            }
+            res.json(result.rows[0]);
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: "Erreur lors de la modification de l'unité d'enseignement" });
+        }
+    } else {
+        // Sinon, modification classique sans image
+        const { id, code, intitule, image } = req.body;
+        if (!id || !code || !intitule || !image) {
+            return res.status(400).json({ error: 'Champs manquants pour la modification de l\'UE' });
+        }
+        try {
+            const result = await pool.query(
+                'UPDATE unite_enseignement SET code = $1, intitule = $2, image = $3 WHERE id = $4 RETURNING *',
+                [code, intitule, image, id]
+            );
+            if (result.rowCount === 0) {
+                return res.status(404).json({ error: 'Unité d\'enseignement non trouvée' });
+            }
+            res.json(result.rows[0]);
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: "Erreur lors de la modification de l'unité d'enseignement" });
+        }
     }
 };
 
@@ -51,7 +89,22 @@ exports.deleteUe = async (req, res) => {
 };
 
 exports.createUe = async (req, res) => {
-    const { code, intitule, image } = req.body;
+    const { code, intitule, imageName } = req.body;
+    let image = null;
+    if (req.file) {
+        // Renommage du fichier uploadé avec le nom souhaité
+        const extension = path.extname(req.file.originalname);
+        const newFileName = imageName || req.file.filename + extension;
+        const oldPath = req.file.path;
+        const newPath = path.join(path.dirname(oldPath), newFileName);
+        try {
+            fs.renameSync(oldPath, newPath);
+            image = newFileName;
+        } catch (err) {
+            console.error('Erreur lors du renommage du fichier :', err);
+            return res.status(500).json({ error: "Erreur lors du traitement de l'image" });
+        }
+    }
     if (!code || !intitule || !image) {
         return res.status(400).json({ error: 'Champs manquants pour la création de l\'UE' });
     }

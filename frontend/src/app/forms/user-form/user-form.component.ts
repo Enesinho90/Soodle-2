@@ -17,7 +17,7 @@ export class UserFormComponent {
   role: string[] = [];
   message: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   onSubmit() {
     const user = {

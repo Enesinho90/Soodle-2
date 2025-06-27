@@ -21,7 +21,7 @@ export class UniteEnseignementService {
         return this.http.get<UniteEnseignement[]>(this.apiUrl);
     }
 
-    updateUe(ue: UniteEnseignement): Observable<UniteEnseignement> {
+    updateUe(ue: UniteEnseignement | FormData): Observable<UniteEnseignement> {
         return this.http.put<UniteEnseignement>(this.apiUrl + '/updateUe', ue);
     }
 
@@ -29,7 +29,7 @@ export class UniteEnseignementService {
         return this.http.delete<any>(`${this.apiUrl}/${id}`);
     }
 
-    createUe(ue: Omit<UniteEnseignement, 'id'>): Observable<UniteEnseignement> {
+    createUe(ue: Omit<UniteEnseignement, 'id'> | FormData): Observable<UniteEnseignement> {
         return this.http.post<UniteEnseignement>(this.apiUrl, ue);
     }
     getUeById(id: number): Observable<UniteEnseignement> {
