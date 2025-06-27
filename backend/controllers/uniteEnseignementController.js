@@ -120,14 +120,22 @@ exports.createUe = async (req, res) => {
     }
 };
 
+
+
 exports.getUeById = async (req, res) => {
     const { id } = req.params;
+
     if (!id) {
-        return res.status(400).json({ error: "ID manquant pour la récupération de l'unité d'enseignement" });
+        return res.status(400).json({ error: "ID manquant pour récupérer l'unité d'enseignement" });
     }
+
     try {
-        const result = await pool.query('SELECT id, code, intitule, image FROM unite_enseignement WHERE id = $1', [id]);
-        if (result.rows.length === 0) {
+        const result = await pool.query(
+            'SELECT id, code, intitule, image FROM unite_enseignement WHERE id = $1',
+            [id]
+        );
+
+        if (result.rowCount === 0) {
             return res.status(404).json({ error: "Unité d'enseignement non trouvée" });
         }
         res.json(result.rows[0]);

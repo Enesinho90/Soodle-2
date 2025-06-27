@@ -23,6 +23,7 @@ export class PostComponent implements OnInit {
     this.authservice.getUserById(this.post.utilisateur_id).subscribe(u => {
       this.user = u
     })
+   
   }
 
   deletePost() {
