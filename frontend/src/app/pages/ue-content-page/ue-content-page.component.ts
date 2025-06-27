@@ -14,6 +14,7 @@ import { CourseHeaderComponent } from "../../components/header/course-header.com
 })
 export class UeContentPageComponent {
   courseId: string | null = null;
+  courseIdInt = parseInt(this.courseId ?? '', 10)
 
   constructor(private route: ActivatedRoute) {
     this.courseId = this.route.snapshot.paramMap.get('id');
