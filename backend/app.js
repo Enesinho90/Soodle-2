@@ -3,8 +3,12 @@ const cors = require('cors');
 const pool = require('./models/db');
 require('dotenv').config();
 
+
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/post'); 
+const uniteEnseignementRoutes = require('./routes/uniteEnseignement'); // ➕ import de la route UE
+const affectationRoutes = require('./routes/affectation'); // ➕ import de la route affectation
+
 
 const app = express();
 app.use(cors());
@@ -12,7 +16,8 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);     
-
+app.use('/api/ues', uniteEnseignementRoutes); // ➕ ajout de la route UE
+app.use('/api/affectations', affectationRoutes); // ➕ ajout de la route affectation
 
 
 app.get('/', async (req, res) => {

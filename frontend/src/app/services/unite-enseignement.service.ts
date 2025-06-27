@@ -1,0 +1,31 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export interface UniteEnseignement {
+    id: number;
+    code: string;
+    intitule: string;
+    image: string;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class UniteEnseignementService {
+    private apiUrl = 'http://localhost:3000/api/ues';
+
+    constructor(private http: HttpClient) { }
+
+    getAllUes(): Observable<UniteEnseignement[]> {
+        return this.http.get<UniteEnseignement[]>(this.apiUrl);
+    }
+
+    updateUe(ue: UniteEnseignement): Observable<UniteEnseignement> {
+        return this.http.put<UniteEnseignement>(this.apiUrl + '/updateUe', ue);
+    }
+
+    deleteUe(id: number): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    }
+}

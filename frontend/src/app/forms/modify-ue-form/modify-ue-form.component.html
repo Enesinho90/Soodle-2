@@ -3,6 +3,8 @@
         <h1>Modifier une unité d'enseignement</h1>
     </div>
 
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
     <div class="form-input">
         <label for="code">Code :</label>
         <input id="code" name="code" [(ngModel)]="code" required (ngModelChange)="updateImageName()" />

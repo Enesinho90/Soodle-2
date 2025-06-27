@@ -32,32 +32,53 @@
                 <button class="small" type="button" (click)="goToModifyUser(user.id)">
                     <i class="fa-solid fa-pencil"></i>
                 </button>
-                <button class="small delete-user" data-id="">
+                <button class="small delete-user" type="button" (click)="openDeletePopup(user)">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
         </tr>
         }
     </table>}
+    @if (showDeletePopup) {
+    <div class="popup-overlay">
+        <div class="popup">
+            <p>Voulez-vous vraiment supprimer l'utilisateur <b>{{userToDelete?.prenom}} {{userToDelete?.nom}}</b> ?</p>
+            <button id="delete" (click)="confirmDeleteUser()">Oui, supprimer</button>
+            <button id="cancel" (click)="closeDeletePopup()">Annuler</button>
+        </div>
+    </div>
+    }
+
+
     @if (isChoosingCourses) {
 
     <table id="ues">
         @for (course of courseList; track course) {
         <tr>
-            <td><img class="image-table" src="images/cours/{{ course.imageUrl}}" alt="Image UE"></td>
+            <td><img class="image-table" src="images/cours/{{ course.image}}" alt="Image UE"></td>
             <td>{{course.code}}</td>
             <td>{{course.intitule}}</td>
             <td class="interact-buttons">
                 <button class="small" type="submit" (click)="goToModifyUe(course.id)">
                     <i class=" fa-solid fa-pencil"></i>
                 </button>
-                <button class="small delete-ue" data-id="">
+                <button class="small delete-ue" type="button" (click)="openDeleteUePopup(course)">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
         </tr>
         }
     </table>
+    }
+    @if (showDeleteUePopup) {
+    <div class="popup-overlay">
+        <div class="popup">
+            <p>Voulez-vous vraiment supprimer l'unité d'enseignement <b>{{ueToDelete?.code}} -
+                    {{ueToDelete?.intitule}}</b> ?</p>
+            <button id="delete" (click)="confirmDeleteUe()">Oui, supprimer</button>
+            <button id="cancel" (click)="closeDeleteUePopup()">Annuler</button>
+        </div>
+    </div>
     }
 
 </div>
