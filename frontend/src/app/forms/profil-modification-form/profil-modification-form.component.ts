@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profil-modification-form',
@@ -14,6 +15,18 @@ export class ProfilModificationFormComponent {
   mail: string = '';
   image: string = '';
   selectedFile: File | null = null;
+  message: string = '';
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      this.nom = user.nom;
+      this.prenom = user.prenom;
+      this.mail = user.email;
+    }
+  }
 
   updateImageName() {
     this.image = this.nom ? 'avatar-' + this.nom : '';
@@ -29,7 +42,19 @@ export class ProfilModificationFormComponent {
   }
 
   onSubmit() {
-    // Traitement du formulaire (affichage ou envoi)
-    console.log({ nom: this.nom, prenom: this.prenom, mail: this.mail, image: this.image, file: this.selectedFile });
+    const user = this.authService.getCurrentUser();
+    if (!user) {
+      this.message = "Utilisateur non connecté.";
+      return;
+    }
+    this.authService.updateProfile({
+      id: user.id,
+      nom: this.nom,
+      prenom: this.prenom,
+      email: this.mail
+    }).subscribe({
+      next: (res: any) => this.message = res.message,
+      error: err => this.message = err.error.message
+    });
   }
 }

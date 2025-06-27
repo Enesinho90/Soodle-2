@@ -26,4 +26,9 @@ export class NavbarComponent {
   togglePopup() {
     this.isProfileInformationsVisible = !this.isProfileInformationsVisible;
   }
+
+  logout() {
+    this.authService.logout();
+    window.location.reload(); // ou tu peux router vers /login si tu préfères
+  }
 }
