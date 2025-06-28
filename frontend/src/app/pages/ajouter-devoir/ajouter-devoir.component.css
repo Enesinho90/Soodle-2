@@ -1,0 +1,103 @@
+/* Police et boîte globale */
+* {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  box-sizing: border-box;
+}
+
+/* Corps principal */
+main {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 100px);
+}
+
+/* Conteneur de largeur maximale */
+.full-width {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Titre */
+.publications {
+  color: #3a5a40;
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Formulaire */
+.form-container {
+  width: 100%;
+  max-width: 750px;
+  background-color: #f5f5f5;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Groupes de champs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #3a5a40;
+}
+
+/* Champs texte */
+input,
+textarea,
+select {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus des champs */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #588157;
+}
+
+/* Zone de texte */
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Bouton */
+.button-add {
+  font-size: 18px;
+  padding: 10px 20px;
+  background-color: #588157;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover bouton */
+.button-add:hover {
+  background-color: #3a5a40;
+}

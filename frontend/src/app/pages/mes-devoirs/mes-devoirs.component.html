@@ -1,0 +1,32 @@
+<main>
+  <div class="full-width">
+    <h2 class="publications">Devoirs à faire</h2>
+
+    <div *ngIf="assignmentTemplates.length === 0" class="no-devoir">
+      Aucun devoir à faire pour le moment.
+    </div>
+
+    <div *ngFor="let template of assignmentTemplates" class="devoir-card">
+      <h3>{{ template.title }}</h3>
+      <p><strong>Consigne :</strong> {{ template.instructions || 'Aucune' }}</p>
+      <p><strong>UE :</strong> {{ ueNames[template.courseId] || template.courseId }}</p>
+      <p><strong>À rendre avant :</strong> {{ template.dueDate | date:'mediumDate' }}</p>
+
+      <input type="file" (change)="onFileSelected($event, template._id)" />
+      <div class="btn-row">
+        <button (click)="submitAssignment()" class="button-submit">Soumettre</button>
+        <button (click)="deleteTemplate(template._id)" class="button-delete">Supprimer ce devoir</button>
+      </div>
+    </div>
+
+    <hr class="separator" />
+
+    <h2 class="publications">Mes devoirs rendus</h2>
+    <ul class="rendus-list">
+      <li *ngFor="let a of assignments">
+        {{ a.file.filename }} — Statut : {{ a.status }}
+        <button (click)="deleteAssignment(a)" class="button-delete-inline">Supprimer</button>
+      </li>
+    </ul>
+  </div>
+</main>

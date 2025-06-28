@@ -1,0 +1,36 @@
+<main>
+  <div class="full-width">
+    <h2 class="publications">Devoirs à corriger</h2>
+
+    <div *ngFor="let a of assignments" class="devoir-card">
+      <p><strong>Étudiant :</strong> {{ a.studentId }}</p>
+      <p><strong>Status :</strong> {{ a.status }}</p>
+      <p><strong>Fichier :</strong>
+        <a [href]="'http://localhost:3000/' + a.file.path" target="_blank">
+          {{ a.file.filename }}
+        </a>
+      </p>
+
+      <ng-container *ngIf="a.status === 'corrigé'; else formCorrection">
+        <p><strong>Note :</strong> {{ a.grade?.score }} / Commentaire : {{ a.grade?.comment }}</p>
+      </ng-container>
+
+      <ng-template #formCorrection>
+        <div class="form-group">
+          <label for="score">Note :</label>
+          <input type="number" min="0" max="20"
+                 [(ngModel)]="note[a._id]" name="score{{a._id}}">
+        </div>
+
+        <div class="form-group">
+          <label for="comment">Commentaire :</label>
+          <textarea rows="2"
+                    [(ngModel)]="comment[a._id]" name="comment{{a._id}}">
+          </textarea>
+        </div>
+
+        <button (click)="corriger(a)" class="button-submit">Valider la correction</button>
+      </ng-template>
+    </div>
+  </div>
+</main>

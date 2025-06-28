@@ -12,7 +12,8 @@ const postRoutes = require('./routes/post');
 const uniteEnseignementRoutes = require('./routes/uniteEnseignement'); // ➕ import de la route UE
 const affectationRoutes = require('./routes/affectation'); // ➕ import de la route affectation
 const forumRoutes = require('./routes/forum');
-
+const assignmentRoutes = require('./routes/assignmentRoutes');
+const assignmentTemplateRoutes = require('./routes/assignmentTemplateRoutes');
 
 const app = express();
 app.use(cors());
@@ -25,6 +26,8 @@ app.use('/api/affectations', affectationRoutes); // ➕ ajout de la route affect
 app.use('/uploads', express.static('uploads'));
 app.use('/logs', logRoutes);
 app.use('/forums', forumRoutes);
+app.use('/api/assignments', assignmentRoutes);
+app.use('/api/assignment-templates', assignmentTemplateRoutes);
 
 app.get('/', async (req, res) => {
     try {

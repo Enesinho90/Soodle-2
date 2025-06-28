@@ -17,6 +17,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { AffectationGuard } from './guards/affectation.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { ForumPageComponent } from './pages/forum-page/forum-page.component';
+import { MesDevoirsComponent } from './pages/mes-devoirs/mes-devoirs.component';
+import { AjouterDevoirComponent } from './pages/ajouter-devoir/ajouter-devoir.component';
+import { CorrectionDevoirsComponent } from './pages/correction-devoirs/correction-devoirs.component';
 
 
 
@@ -36,5 +39,8 @@ export const routes: Routes = [
     { path: 'admin/modify_user/:id', component: ModifyUserFormComponent, canActivate: [AuthGuard, AdminGuard] },
     { path: 'admin/modify_ue/:id', component: ModifyUeFormComponent, canActivate: [AuthGuard, AdminGuard] },
     { path: 'courses/:id/participants', component: ParticipantsComponent, canActivate: [AuthGuard, AffectationGuard] },
-    { path: 'courses/:id/forum', component: ForumPageComponent, canActivate: [AuthGuard] }
+    { path: 'courses/:id/forum', component: ForumPageComponent, canActivate: [AuthGuard] },
+    {path : 'mes-devoir',component : MesDevoirsComponent},
+    {path :'correction-devoir', component : CorrectionDevoirsComponent},
+    {path : 'ajouter-devoir',component : AjouterDevoirComponent}
 ];
