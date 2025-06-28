@@ -11,7 +11,7 @@ const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/post');
 const uniteEnseignementRoutes = require('./routes/uniteEnseignement'); // ➕ import de la route UE
 const affectationRoutes = require('./routes/affectation'); // ➕ import de la route affectation
-
+const forumRoutes = require('./routes/forum');
 
 
 const app = express();
@@ -24,6 +24,7 @@ app.use('/api/ues', uniteEnseignementRoutes); // ➕ ajout de la route UE
 app.use('/api/affectations', affectationRoutes); // ➕ ajout de la route affectation
 app.use('/uploads', express.static('uploads'));
 app.use('/logs', logRoutes);
+app.use('/forums', forumRoutes);
 
 app.get('/', async (req, res) => {
     try {

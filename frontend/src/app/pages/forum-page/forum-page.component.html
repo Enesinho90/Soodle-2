@@ -1,0 +1,32 @@
+<h2>Forum du cours</h2>
+
+<!-- Formulaire de création de thread -->
+<div class="new-thread-form">
+    <input [(ngModel)]="newThreadTitle" placeholder="Titre du sujet" />
+    <textarea [(ngModel)]="newThreadMessage" placeholder="Votre message initial..."></textarea>
+    <button (click)="createThread()">Créer le sujet</button>
+</div>
+<hr />
+
+<div *ngIf="forum?.threads?.length > 0; else noThreads">
+    <div *ngFor="let thread of forum.threads" class="thread">
+        <h3>{{ thread.title }} <span style="font-size: 12px;">– {{ thread.author.prenom }} {{ thread.author.nom
+                }}</span></h3>
+
+        <div class="message" *ngFor="let msg of thread.messages">
+            <p><strong>{{ msg.author.prenom }} {{ msg.author.nom }} :</strong> {{ msg.content }}</p>
+            <small>{{ msg.createdAt | date:'short' }}</small>
+        </div>
+
+        <div class="reply">
+            <input [(ngModel)]="newReplies[thread._id]" placeholder="Votre réponse..." />
+            <button (click)="sendReply(thread._id)">Envoyer</button>
+        </div>
+
+        <hr />
+    </div>
+</div>
+
+<ng-template #noThreads>
+    <p>Aucun sujet dans ce forum pour l’instant.</p>
+</ng-template>
