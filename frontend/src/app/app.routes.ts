@@ -35,13 +35,13 @@ export const routes: Routes = [
     { path: 'admin/add_user', component: UserFormComponent, canActivate: [AuthGuard, AdminGuard] },
     { path: 'admin/add_ue', component: UeFormComponent, canActivate: [AuthGuard, AdminGuard] },
     { path: 'courses/:id', component: UeContentPageComponent, canActivate: [AuthGuard, AffectationGuard] },
-    { path: 'courses/:id/post', component: PageCreationModificationComponent, canActivate: [AuthGuard, AffectationGuard] },
+    { path: 'courses/:id/post', component: PageCreationModificationComponent, canActivate: [AuthGuard, AffectationGuard,ProfGuard] },
     { path: 'admin/affectations/:id', component: AffectationUeFormComponent, canActivate: [AuthGuard, AdminGuard] },
     { path: 'admin/modify_user/:id', component: ModifyUserFormComponent, canActivate: [AuthGuard, AdminGuard] },
     { path: 'admin/modify_ue/:id', component: ModifyUeFormComponent, canActivate: [AuthGuard, AdminGuard] },
-    { path: 'courses/:id/participants', component: ParticipantsComponent, canActivate: [AuthGuard, AffectationGuard] },
+    { path: 'courses/:id/participants', component: ParticipantsComponent, canActivate: [AuthGuard, AffectationGuard,] },
     { path: 'courses/:id/forum', component: ForumPageComponent, canActivate: [AuthGuard] },
     {path : 'mes-devoir',component : MesDevoirsComponent},
     {path :'correction-devoir', component : CorrectionDevoirsComponent, canActivate : [ProfGuard]},
-    {path : 'ajouter-devoir',component : AjouterDevoirComponent,  canActivate : [ProfGuard]}
+    {path :'ajouter-devoir',component : AjouterDevoirComponent,  canActivate : [ProfGuard]}
 ];

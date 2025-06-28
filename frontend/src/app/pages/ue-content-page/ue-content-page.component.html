@@ -11,9 +11,11 @@
     <h2 class="publications">Publications</h2>
     <div class="search-add-bar">
       <app-search-bar></app-search-bar>
-      <a [routerLink]="['/courses', courseId, 'post']" class="button-add">
-        <i class="fa-solid fa-plus"></i>
-      </a>
+        <a *ngIf="!user?.roles?.includes('ROLE_ETUDIANT')" 
+        [routerLink]="['/courses', courseId, 'post']" 
+        class="button-add">
+             <i class="fa-solid fa-plus"></i>
+        </a>
     </div>
     <app-list-post [ueUid]="courseId"></app-list-post>
 
