@@ -7,12 +7,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class ProfGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const user: any = this.authService.getCurrentUser(); // on suppose que c’est un objet direct
 
-    if (user && user.roles && user.roles.includes('ROLE_PROF')) {
+    if (user && user.roles && user.roles.includes('ROLE_PROFESSEUR')) {
       return true;
     }
 

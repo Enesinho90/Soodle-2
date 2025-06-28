@@ -67,8 +67,8 @@ exports.updateUe = async (req, res) => {
         }
         try {
             const result = await pool.query(
-                'UPDATE unite_enseignement SET code = $1, intitule = $2, image = $3 WHERE id = $4 RETURNING *',
-                [code, intitule, image, id]
+                'UPDATE unite_enseignement SET code = $1, intitule = $2 WHERE id = $3 RETURNING *',
+                [code, intitule, id]
             );
             if (result.rowCount === 0) {
                 return res.status(404).json({ error: 'Unité d\'enseignement non trouvée' });

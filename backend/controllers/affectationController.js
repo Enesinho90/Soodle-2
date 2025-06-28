@@ -144,7 +144,7 @@ exports.getEtudiantsByCourseId = async (req, res) => {
             SELECT u.* FROM utilisateur u
             JOIN affectation a ON u.id = a.utilisateur_id
             WHERE a.unite_enseignement_id = $1
-            AND u.roles::text = '["ROLE_USER"]'
+            AND u.roles::text = '["ROLE_ETUDIANT"]'
             ORDER BY u.nom, u.prenom
         `, [id]);
         res.json(result.rows);
