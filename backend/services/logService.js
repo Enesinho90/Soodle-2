@@ -8,9 +8,9 @@ async function logActivity({ userId, action, details }) {
             details
         });
         await log.save();
-        console.log("📦 Log enregistré :", action);
+        console.log("Log enregistré :", action);
     } catch (err) {
-        console.error("❌ Erreur lors de l'enregistrement du log", err);
+        console.error("Erreur lors de l'enregistrement du log", err);
     }
 }
 

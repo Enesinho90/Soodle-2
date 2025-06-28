@@ -16,7 +16,7 @@ exports.logViewCourse = async (req, res) => {
         });
         res.status(200).json({ message: "Log enregistré avec succès" });
     } catch (err) {
-        console.error("❌ Erreur lors du log view_course", err);
+        console.error(" Erreur lors du log view_course", err);
         res.status(500).json({ message: "Erreur lors de l'enregistrement du log" });
     }
 };
@@ -34,7 +34,7 @@ exports.logLogout = async (req, res) => {
         });
         res.status(200).json({ message: "Log de déconnexion enregistré avec succès" });
     } catch (err) {
-        console.error("❌ Erreur lors du log logout", err);
+        console.error(" Erreur lors du log logout", err);
         res.status(500).json({ message: "Erreur lors de l'enregistrement du log de déconnexion" });
     }
 };

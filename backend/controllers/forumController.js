@@ -1,7 +1,6 @@
 const Forum = require('../models/forum.model');
 const { logActivity } = require('../services/logService');
 
-// 🔍 Obtenir le forum d’un cours
 exports.getForumByCourse = async (req, res) => {
     const courseId = parseInt(req.params.courseId);
     try {
@@ -18,7 +17,7 @@ exports.getForumByCourse = async (req, res) => {
     }
 };
 
-// 🧵 Créer un nouveau sujet (thread)
+
 exports.createThread = async (req, res) => {
     const { courseId } = req.params;
     const { title, courseTitle, nom, prenom, roles, id, messages } = req.body;
@@ -72,7 +71,7 @@ exports.createThread = async (req, res) => {
     }
 };
 
-// 💬 Ajouter une réponse à un sujet
+
 exports.addMessage = async (req, res) => {
     const courseId = parseInt(req.params.courseId);
     const threadId = req.params.threadId;

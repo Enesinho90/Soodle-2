@@ -9,8 +9,8 @@ require('dotenv').config();
 const logRoutes = require('./routes/log');
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/post');
-const uniteEnseignementRoutes = require('./routes/uniteEnseignement'); // ➕ import de la route UE
-const affectationRoutes = require('./routes/affectation'); // ➕ import de la route affectation
+const uniteEnseignementRoutes = require('./routes/uniteEnseignement');
+const affectationRoutes = require('./routes/affectation'); 
 const forumRoutes = require('./routes/forum');
 const assignmentRoutes = require('./routes/assignmentRoutes');
 const assignmentTemplateRoutes = require('./routes/assignmentTemplateRoutes');
@@ -21,8 +21,8 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
-app.use('/api/ues', uniteEnseignementRoutes); // ➕ ajout de la route UE
-app.use('/api/affectations', affectationRoutes); // ➕ ajout de la route affectation
+app.use('/api/ues', uniteEnseignementRoutes); 
+app.use('/api/affectations', affectationRoutes); 
 app.use('/uploads', express.static('uploads'));
 app.use('/logs', logRoutes);
 app.use('/forums', forumRoutes);

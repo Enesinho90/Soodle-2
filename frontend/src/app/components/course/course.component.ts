@@ -18,11 +18,11 @@ export class CourseComponent {
     const courseTitle = this.course.intitule;
     this.logService.logViewCourse(userId, id, courseTitle).subscribe({
       next: () => {
-        console.log("✅ Log envoyé, redirection...");
+        console.log("Log envoyé, redirection...");
         this.router.navigate(['/courses', id]);
       },
       error: err => {
-        console.error("❌ Log échoué, mais on redirige quand même", err);
+        console.error(" Log échoué, mais on redirige quand même", err);
         this.router.navigate(['/courses', id]); // on redirige même si le log échoue
       }
     });
