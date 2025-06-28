@@ -1,6 +1,7 @@
 const pool = require('../models/db');
 const fs = require('fs');
 const path = require('path');
+const { logActivity } = require('../services/logService');
 
 // Contrôleur pour les unités d'enseignement (optionnel si logique complexe à ajouter plus tard)
 // Pour l'instant, la logique est directement dans la route.
@@ -44,6 +45,15 @@ exports.updateUe = async (req, res) => {
             if (result.rowCount === 0) {
                 return res.status(404).json({ error: 'Unité d\'enseignement non trouvée' });
             }
+            // Log d'activité MongoDB
+            await logActivity({
+                userId: id,
+                action: 'update ue',
+                details: {
+                    ip: req.ip,
+                    browser: req.headers['user-agent'],
+                }
+            });
             res.json(result.rows[0]);
         } catch (err) {
             console.error(err);
@@ -63,6 +73,15 @@ exports.updateUe = async (req, res) => {
             if (result.rowCount === 0) {
                 return res.status(404).json({ error: 'Unité d\'enseignement non trouvée' });
             }
+            // Log d'activité MongoDB
+            await logActivity({
+                userId: id,
+                action: 'update ue',
+                details: {
+                    ip: req.ip,
+                    browser: req.headers['user-agent'],
+                }
+            });
             res.json(result.rows[0]);
         } catch (err) {
             console.error(err);
@@ -81,6 +100,16 @@ exports.deleteUe = async (req, res) => {
         if (result.rowCount === 0) {
             return res.status(404).json({ error: "Unité d'enseignement non trouvée" });
         }
+        // Log d'activité MongoDB
+        await logActivity({
+            userId: id,
+            action: 'delete ue',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent'],
+                id: id,
+            }
+        });
         res.json({ message: "Unité d'enseignement supprimée avec succès" });
     } catch (err) {
         console.error(err);
@@ -113,6 +142,16 @@ exports.createUe = async (req, res) => {
             'INSERT INTO unite_enseignement (code, intitule, image) VALUES ($1, $2, $3) RETURNING *',
             [code, intitule, image]
         );
+        // Log d'activité MongoDB
+        await logActivity({
+            userId: result.id,
+            action: 'create ue',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent'],
+                ue: code
+            }
+        });
         res.status(201).json(result.rows[0]);
     } catch (err) {
         console.error(err);

@@ -2,17 +2,18 @@ const pool = require('../models/db');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { logActivity } = require('../services/logService');
 
 // Configuration de multer pour l'upload de fichiers
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadPath = './uploads/posts';
-    
+
     // Créer le dossier s'il n'existe pas
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath, { recursive: true });
     }
-    
+
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
@@ -38,12 +39,12 @@ exports.createPost = async (req, res) => {
     console.log('Fichier reçu:', req.file);
 
     const { utilisateur_id, unite_enseignement_id, type, titre, contenu } = req.body;
-    
+
     let fichierNom = null;
     let fichierPath = null;
-    
+
     if (req.file) {
-       fichierNom = req.file.filename; // Nom original pour affichage
+      fichierNom = req.file.filename; // Nom original pour affichage
       fichierPath = req.file.path; // Chemin de stockage
     }
 
@@ -53,6 +54,17 @@ exports.createPost = async (req, res) => {
        RETURNING *`,
       [utilisateur_id, unite_enseignement_id, type, titre, contenu, fichierNom]
     );
+    // Log d'activité MongoDB
+    await logActivity({
+      userId: utilisateur_id,
+      action: 'create post',
+      details: {
+        ip: req.ip,
+        browser: req.headers['user-agent'],
+        ue: unite_enseignement_id,
+        with_file: type
+      }
+    });
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -78,13 +90,22 @@ exports.getPostsByUE = async (req, res) => {
 
 
 
-exports.deletePostById = async (req,res) => {
-  const {idPost} = req.params
+exports.deletePostById = async (req, res) => {
+  const { idPost } = req.params
   try {
     const result = await pool.query(
       'DELETE FROM post WHERE id = $1;',
       [idPost]
     );
+    // Log d'activité MongoDB
+    await logActivity({
+      userId: idPost,
+      action: 'delete post',
+      details: {
+        ip: req.ip,
+        browser: req.headers['user-agent'],
+      }
+    });
     res.status(200).json({ message: 'Post supprimé avec succès' });
   } catch (err) {
     console.error('Erreur deletePostById :', err);

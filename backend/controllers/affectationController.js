@@ -1,4 +1,5 @@
 const pool = require('../models/db');
+const { logActivity } = require('../services/logService');
 
 exports.getAllAffectations = async (req, res) => {
     try {
@@ -48,6 +49,16 @@ exports.createAffectation = async (req, res) => {
             'INSERT INTO affectation (utilisateur_id, unite_enseignement_id, date_inscription) VALUES ($1, $2, NOW()) RETURNING *',
             [utilisateur_id, unite_enseignement_id]
         );
+        // Log d'activité MongoDB
+        await logActivity({
+            userId: utilisateur_id,
+            action: 'create affectation ue',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent'],
+                affected_ue: unite_enseignement_id,
+            }
+        });
         res.status(201).json(result.rows[0]);
     } catch (err) {
         console.error(err);
@@ -69,6 +80,16 @@ exports.deleteAffectation = async (req, res) => {
         if (result.rowCount === 0) {
             return res.status(404).json({ error: "Affectation non trouvée" });
         }
+        // Log d'activité MongoDB
+        await logActivity({
+            userId: utilisateur_id,
+            action: 'delete affectation ue',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent'],
+                affected_ue: unite_enseignement_id,
+            }
+        });
         res.json({ message: "Affectation supprimée avec succès" });
     } catch (err) {
         console.error(err);

@@ -1,6 +1,8 @@
 const pool = require('../models/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { logActivity } = require('../services/logService');
+
 require('dotenv').config();
 
 exports.login = async (req, res) => {
@@ -26,6 +28,16 @@ exports.login = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '2h' }
         );
+
+        // après une connexion réussie par exemple :
+        await logActivity({
+            userId: user.id,
+            action: 'login',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent']
+            }
+        });
 
         res.json({
             message: 'Connexion réussie',
@@ -62,7 +74,18 @@ exports.register = async (req, res) => {
             'INSERT INTO utilisateur (email, password, nom, prenom, roles, avatar) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, email, nom, prenom, roles, avatar',
             [email, hashedPassword, nom, prenom, JSON.stringify(roles), avatar]
         );
+
         const user = result.rows[0];
+        // 📝 Log d'activité MongoDB
+        await logActivity({
+            userId: user.id,
+            action: 'register',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent'],
+                email: user.email
+            }
+        });
         res.status(201).json({
             message: 'Compte créé avec succès',
             user
@@ -105,6 +128,15 @@ exports.updateProfile = async (req, res) => {
         if (result.rows.length === 0) {
             return res.status(404).json({ message: 'Utilisateur non trouvé.' });
         }
+        // 📝 Log d'activité MongoDB
+        await logActivity({
+            userId: id,
+            action: 'user update profile',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent'],
+            }
+        });
         res.json({
             message: avatarFileName ? 'Profil et avatar mis à jour avec succès' : 'Profil mis à jour avec succès',
             user: result.rows[0]
@@ -133,6 +165,15 @@ exports.changePassword = async (req, res) => {
         const hashedPassword = await bcrypt.hash(newPassword, 10);
         // Mettre à jour le mot de passe
         await pool.query('UPDATE utilisateur SET password = $1 WHERE id = $2', [hashedPassword, id]);
+        // 📝 Log d'activité MongoDB
+        await logActivity({
+            userId: user.id,
+            action: 'user update password',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent'],
+            }
+        });
         res.json({ message: 'Mot de passe modifié avec succès.' });
     } catch (err) {
         console.error(err);
@@ -156,6 +197,14 @@ exports.updateProfileAdmin = async (req, res) => {
         if (result.rows.length === 0) {
             return res.status(404).json({ message: 'Utilisateur non trouvé.' });
         }
+        await logActivity({
+            userId: id,
+            action: 'admin update user profile',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent'],
+            }
+        });
         res.json({
             message: 'Profil mis à jour avec succès',
             user: result.rows[0]
@@ -184,6 +233,15 @@ exports.deleteUser = async (req, res) => {
             return res.status(404).json({ message: 'Utilisateur non trouvé.' });
         }
         res.json({ message: 'Utilisateur supprimé avec succès', id: result.rows[0].id });
+        // 📝 Log d'activité MongoDB
+        await logActivity({
+            userId: result.rows[0].id,
+            action: 'user deleted',
+            details: {
+                ip: req.ip,
+                browser: req.headers['user-agent'],
+            }
+        });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Erreur serveur lors de la suppression de l'utilisateur" });
