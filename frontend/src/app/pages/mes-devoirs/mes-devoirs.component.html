@@ -15,7 +15,10 @@
       <input type="file" (change)="onFileSelected($event, template._id)" />
       <div class="btn-row">
         <button (click)="submitAssignment()" class="button-submit">Soumettre</button>
-        <button (click)="deleteTemplate(template._id)" class="button-delete">Supprimer ce devoir</button>
+        @if (!user?.roles?.includes('ROLE_ETUDIANT')) {
+          <button (click)="deleteTemplate(template._id)" class="button-delete">Supprimer ce devoir</button>
+        }
+        
       </div>
     </div>
 
@@ -26,6 +29,7 @@
       <li *ngFor="let a of assignments">
         {{ a.file.filename }} — Statut : {{ a.status }}
         <button (click)="deleteAssignment(a)" class="button-delete-inline">Supprimer</button>
+        
       </li>
     </ul>
   </div>

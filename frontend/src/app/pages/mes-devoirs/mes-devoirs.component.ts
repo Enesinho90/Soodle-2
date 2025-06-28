@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { AssignmentTemplate } from '../../models/assignment-template.model';
 import { CommonModule } from '@angular/common';
 import { UniteEnseignementService } from '../../services/unite-enseignement.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-mes-devoirs',
@@ -19,6 +20,9 @@ export class MesDevoirsComponent implements OnInit {
   assignments: any[] = [];
   assignmentTemplates: AssignmentTemplate[] = [];
   ueNames: { [id: string]: string } = {};
+  user: User | null = null;
+
+
 
 
   constructor(
@@ -30,16 +34,13 @@ export class MesDevoirsComponent implements OnInit {
  ngOnInit(): void {
   const studentId = String(this.authService.getCurrentId());
 
-  // 🔹 Devoirs rendus par l'étudiant
   this.assignmentService.getAssignmentsByStudent(studentId).subscribe((data) => {
     this.assignments = data;
   });
 
-  // 🔹 Templates des devoirs à faire
   this.assignmentService.getTemplatesByStudentId(studentId).subscribe((templates: AssignmentTemplate[]) => {
     this.assignmentTemplates = templates;
 
-    // Pour chaque template, on récupère le nom de l'UE
     this.assignmentTemplates.forEach((template) => {
       const courseId = Number(template.courseId);
 
@@ -55,6 +56,8 @@ export class MesDevoirsComponent implements OnInit {
       }
     });
   });
+  this.user = this.authService.getCurrentUser(); 
+  console.log(this.user)
 }
 
 
@@ -77,7 +80,7 @@ export class MesDevoirsComponent implements OnInit {
       alert('Devoir envoyé !');
       this.selectedFile = null;
       this.selectedTemplateId = '';
-      this.ngOnInit(); // Recharge la liste
+      this.ngOnInit();
     });
   }
 

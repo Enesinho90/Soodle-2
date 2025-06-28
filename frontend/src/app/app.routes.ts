@@ -41,7 +41,7 @@ export const routes: Routes = [
     { path: 'admin/modify_ue/:id', component: ModifyUeFormComponent, canActivate: [AuthGuard, AdminGuard] },
     { path: 'courses/:id/participants', component: ParticipantsComponent, canActivate: [AuthGuard, AffectationGuard,] },
     { path: 'courses/:id/forum', component: ForumPageComponent, canActivate: [AuthGuard] },
-    {path : 'mes-devoir',component : MesDevoirsComponent},
-    {path :'correction-devoir', component : CorrectionDevoirsComponent, canActivate : [ProfGuard]},
-    {path :'ajouter-devoir',component : AjouterDevoirComponent,  canActivate : [ProfGuard]}
+    {path : 'mes-devoir',component : MesDevoirsComponent, canActivate : [AuthGuard]},
+    {path :'correction-devoir', component : CorrectionDevoirsComponent, canActivate : [AuthGuard,ProfGuard]},
+    {path :'ajouter-devoir',component : AjouterDevoirComponent,  canActivate : [AuthGuard,ProfGuard]}
 ];
