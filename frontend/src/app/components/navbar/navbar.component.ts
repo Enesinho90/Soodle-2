@@ -39,12 +39,12 @@ export class NavbarComponent implements OnInit {
     }
     this.logService.logLogout(this.user.id).subscribe({
       next: () => {
-        console.log('✅ Log envoyé, redirection...');
+        console.log('Log envoyé, redirection...');
         this.authService.logout();
         window.location.reload();
       },
       error: err => {
-        console.error('❌ Log échoué, mais on redirige quand même', err);
+        console.error('Log échoué, mais on redirige quand même', err);
         this.authService.logout();
         window.location.reload();
       }

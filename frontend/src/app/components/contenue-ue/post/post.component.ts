@@ -15,6 +15,7 @@ export class PostComponent implements OnInit {
   @Output() postDeleted = new EventEmitter<void>();
  
   user: User | null = null;
+  currrentUser : User | null = null;
 
   constructor(private authservice: AuthService, private postService: PostService) {
   }
@@ -23,6 +24,7 @@ export class PostComponent implements OnInit {
     this.authservice.getUserById(this.post.utilisateur_id).subscribe(u => {
       this.user = u
     })
+    this.currrentUser = this.authservice.getCurrentUser()
    
   }
 

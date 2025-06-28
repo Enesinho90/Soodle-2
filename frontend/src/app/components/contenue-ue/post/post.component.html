@@ -1,8 +1,7 @@
 <div class="post">
   <div class="titre-logo-supp">
     <div class="titre-logo">
-      <!-- Icône en fonction du type -->
-      <!-- Type 0 = message -->
+    
       <i *ngIf="!post.type" class="fa-regular fa-message"></i>
 
       <!-- Type 1 = fichier -->
@@ -16,7 +15,10 @@
     </div>
 
     <!-- Bouton de suppression (visible seulement pour les profs) -->
-    <i class="fa-solid fa-xmark" (click)="deletePost()"></i>
+     @if (!currrentUser?.roles?.includes('ROLE_ETUDIANT')) {
+       <i  class="fa-solid fa-xmark" (click)="deletePost()"></i>
+     }
+   
   </div>
 
   <p>Posté par {{ user?.prenom }} {{ user?.nom }} le {{ post.date | date: 'dd/MM/yyyy à HH:mm' }}</p>
@@ -26,11 +28,14 @@
   </div>
 
   <!-- Bouton modifier (visible seulement pour les profs) -->
-  <div class="modifier">
-    <a href="/modification/ue/456/post/123">
-      <input class="button-modifier" type="button" value="Modifier">
-    </a>
-  </div>
+    @if (!currrentUser?.roles?.includes('ROLE_ETUDIANT')) {
+      <div class="modifier">
+        <a href="#">
+          <input class="button-modifier" type="button" value="Modifier">
+        </a>
+      </div>
+    }
+  
 
   <hr>
 </div>

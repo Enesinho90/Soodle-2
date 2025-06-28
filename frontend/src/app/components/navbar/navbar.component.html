@@ -1,72 +1,63 @@
 <div class="navbar">
-    <div class="navbar-left">
-        <img class=logo-navbar src="soodle-s-nobg.png" alt="logo Soodle">
-        <p class="pages-navbar">
-            <a class="link-to-page" routerLink="/courses">
-                Mes cours
-            </a>
-        </p>
+  <div class="navbar-left">
+    <img class="logo-navbar" src="soodle-s-nobg.png" alt="logo Soodle">
 
-        @if (user.roles.includes('ROLE_ADMIN')) {
-        <p class="pages-navbar"> <a class="link-to-page" routerLink="/admin"> Admin </a>
-        </p>
-        }
+    <p class="pages-navbar">
+      <a class="link-to-page" routerLink="/courses">Mes cours</a>
+    </p>
 
-      
-        <p class="pages-navbar">
-            <a class="link-to-page" routerLink="/mes-devoir">
-                Mes devoirs
-            </a>
-        </p>
+    <p class="pages-navbar" *ngIf="user?.roles?.includes('ROLE_ADMIN')">
+      <a class="link-to-page" routerLink="/admin">Admin</a>
+    </p>
 
-         
-         
+    <p class="pages-navbar">
+      <a class="link-to-page" routerLink="/mes-devoir">Mes devoirs</a>
+    </p>
 
-         @if (user.roles.includes('ROLE_ADMIN') ||  user.roles.includes('ROLE_PROF') ) {
-              <p class="pages-navbar">
-                 <a class="link-to-page" routerLink="/ajouter-devoir">
-                    Ajouter des devoirs
-                </a>
-            </p>
-         }
-       
-         @if (user.roles.includes('ROLE_ADMIN') ||  user.roles.includes('ROLE_PROF') ) {
-            <p class="pages-navbar">
-                <a class="link-to-page" routerLink="/correction-devoir">
-                    Correction des devoirs
-                </a>
-            </p>
-         }
-         
-    </div>
-    <div class="navbar-right">
-        <i class="fa-regular fa-bell"></i>
-        <img id="profil-picture" (click)="togglePopup()" class="avatar"
-            [src]="'http://localhost:3000/uploads/' + user.avatar" alt="avatar">
-    </div>
+    <p class="pages-navbar" *ngIf="user?.roles?.includes('ROLE_ADMIN') || user?.roles?.includes('ROLE_PROF')">
+      <a class="link-to-page" routerLink="/ajouter-devoir">Ajouter des devoirs</a>
+    </p>
+
+    <p class="pages-navbar" *ngIf="user?.roles?.includes('ROLE_ADMIN') || user?.roles?.includes('ROLE_PROF')">
+      <a class="link-to-page" routerLink="/correction-devoir">Correction des devoirs</a>
+    </p>
+  </div>
+
+  <div class="navbar-right">
+    <i class="fa-regular fa-bell"></i>
+    <img
+      id="profil-picture"
+      (click)="togglePopup()"
+      class="avatar"
+      [src]="'http://localhost:3000/uploads/' + user?.avatar"
+      alt="avatar"
+    />
+  </div>
 </div>
-<div id="profil-popup" *ngIf="isProfileInformationsVisible">
-    <div class="profil-informations">
-        <img class="avatar-onclick" [src]="'http://localhost:3000/uploads/' + user.avatar" alt="avatar">
-        <div class="person">
-            <p class="username">{{user.nom | uppercase}} {{user.prenom }}</p>
-            <p class="usermail"> {{user.email }}</p>
-            <p class="userrole">@for (role of user.roles; track role) {
-                @if (role === 'ROLE_ADMIN') {
-                <span class="green">Administrateur </span>
-                }
-                @if (role === 'ROLE_PROFESSEUR') {
-                <span class="green">Professeur </span>
-                }
-                @if (role === 'ROLE_USER') {
-                <span class="green">Etudiant</span>
-                }
-                }
-            </p>
-        </div>
+
+<div id="profil-popup" *ngIf="isProfileInformationsVisible && user">
+  <div class="profil-informations">
+    <img
+      class="avatar-onclick"
+      [src]="'http://localhost:3000/uploads/' + user.avatar"
+      alt="avatar"
+    />
+    <div class="person">
+      <p class="username">{{ user.nom | uppercase }} {{ user.prenom }}</p>
+      <p class="usermail">{{ user.email }}</p>
+      <p class="userrole">
+        <span *ngIf="user.roles?.includes('ROLE_ADMIN')" class="green">Administrateur</span>
+        <span *ngIf="user.roles?.includes('ROLE_PROFESSEUR')" class="green">Professeur</span>
+        <span *ngIf="user.roles?.includes('ROLE_USER')" class="green">Étudiant</span>
+      </p>
     </div>
-    <hr>
-    <p class="acces-profil"> <a routerLink="/profil"><i class="fa-regular fa-user"></i>Accéder a mon profil</a></p>
-    <hr>
-    <p class="acces-profil"><a (click)="logout()"><i class="fa-solid fa-arrow-right-to-bracket"></i>Deconnexion</a></p>
+  </div>
+  <hr />
+  <p class="acces-profil">
+    <a routerLink="/profil"><i class="fa-regular fa-user"></i>Accéder à mon profil</a>
+  </p>
+  <hr />
+  <p class="acces-profil">
+    <a (click)="logout()"><i class="fa-solid fa-arrow-right-to-bracket"></i>Déconnexion</a>
+  </p>
 </div>
