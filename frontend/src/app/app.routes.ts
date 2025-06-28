@@ -20,6 +20,7 @@ import { ForumPageComponent } from './pages/forum-page/forum-page.component';
 import { MesDevoirsComponent } from './pages/mes-devoirs/mes-devoirs.component';
 import { AjouterDevoirComponent } from './pages/ajouter-devoir/ajouter-devoir.component';
 import { CorrectionDevoirsComponent } from './pages/correction-devoirs/correction-devoirs.component';
+import { ProfGuard } from './guards/prof.guard';
 
 
 
@@ -41,6 +42,6 @@ export const routes: Routes = [
     { path: 'courses/:id/participants', component: ParticipantsComponent, canActivate: [AuthGuard, AffectationGuard] },
     { path: 'courses/:id/forum', component: ForumPageComponent, canActivate: [AuthGuard] },
     {path : 'mes-devoir',component : MesDevoirsComponent},
-    {path :'correction-devoir', component : CorrectionDevoirsComponent},
-    {path : 'ajouter-devoir',component : AjouterDevoirComponent}
+    {path :'correction-devoir', component : CorrectionDevoirsComponent, canActivate : [ProfGuard]},
+    {path : 'ajouter-devoir',component : AjouterDevoirComponent,  canActivate : [ProfGuard]}
 ];
