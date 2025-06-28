@@ -10,6 +10,7 @@ const uniteEnseignementRoutes = require('./routes/uniteEnseignement'); // ➕ im
 const affectationRoutes = require('./routes/affectation'); // ➕ import de la route affectation
 
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());

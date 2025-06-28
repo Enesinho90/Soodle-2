@@ -11,10 +11,18 @@
         <p>Prénom : <span class="green"> {{user.prenom}}</span></p>
         <p>Adresse mail : <span class="green"> {{user.email}}</span></p>
         <p>Rôle :
-            <span class="green">
-                {{user.roles}}
 
-            </span>
+            @for (role of user.roles; track role) {
+            @if (role === 'ROLE_ADMIN') {
+            <span class="green">Administrateur </span>
+            }
+            @if (role === 'ROLE_PROFESSEUR') {
+            <span class="green">Professeur </span>
+            }
+            @if (role === 'ROLE_USER') {
+            <span class="green">Etudiant</span>
+            }
+            }
         </p>
 
         <div>

@@ -22,7 +22,18 @@
         <tr>
             <td><img class="image-table" [src]="'http://localhost:3000/uploads/' + user.avatar" alt="Avatar"></td>
             <td>{{user.prenom}} {{user.nom}}</td>
-            <td>{{user.roles}}</td>
+            <td>@for (role of user.roles; track role) {
+                @if (role === 'ROLE_ADMIN') {
+                <span class="green">Administrateur </span>
+                }
+                @if (role === 'ROLE_PROFESSEUR') {
+                <span class="green">Professeur </span>
+                }
+                @if (role === 'ROLE_USER') {
+                <span class="green">Etudiant </span>
+                }
+                }
+            </td>
             <td><a [href]="'mailto:' + user.email">{{user.email}}</a></td>
             <td class="interact-buttons">
                 <button class="small" type="button" (click)="goToAffectations(user.id)">
@@ -56,7 +67,7 @@
         <tr>
             <td><img class="image-table" [src]="'http://localhost:3000/uploads/' + course.image" alt="Image UE"></td>
             <td>{{course.code}}</td>
-            <td>{{course.intitule}}</td>
+            <td><span class="green">{{course.intitule}}</span></td>
             <td class="interact-buttons">
                 <button class="small" type="submit" (click)="goToModifyUe(course.id)">
                     <i class=" fa-solid fa-pencil"></i>

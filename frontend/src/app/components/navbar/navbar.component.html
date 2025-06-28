@@ -23,7 +23,18 @@
         <div class="person">
             <p class="username">{{user.nom | uppercase}} {{user.prenom }}</p>
             <p class="usermail"> {{user.email }}</p>
-            <p class="userrole"> {{user.roles }}</p>
+            <p class="userrole">@for (role of user.roles; track role) {
+                @if (role === 'ROLE_ADMIN') {
+                <span class="green">Administrateur </span>
+                }
+                @if (role === 'ROLE_PROFESSEUR') {
+                <span class="green">Professeur </span>
+                }
+                @if (role === 'ROLE_USER') {
+                <span class="green">Etudiant</span>
+                }
+                }
+            </p>
         </div>
     </div>
     <hr>

@@ -16,7 +16,18 @@
                     <td><img class="image-table" [src]="'http://localhost:3000/uploads/' + prof.avatar" alt="Avatar">
                     </td>
                     <td>{{prof.prenom}} {{prof.nom}}</td>
-                    <td>{{prof.roles}}</td>
+                    <td>@for (role of prof.roles; track role) {
+                        @if (role === 'ROLE_ADMIN') {
+                        <span class="green">Administrateur </span>
+                        }
+                        @if (role === 'ROLE_PROFESSEUR') {
+                        <span class="green">Professeur </span>
+                        }
+                        @if (role === 'ROLE_USER') {
+                        <span class="green">Etudiant </span>
+                        }
+                        }
+                    </td>
                     <td><a [href]="'mailto:' + prof.email">{{prof.email}}</a></td>
                 </tr>
                 }
@@ -33,19 +44,14 @@
         <!-- Tableau des Etudiants -->
         <p class="title2">Etudiants</p>
         <table id="users">
-            <tr>
-                <th>Avatar</th>
-                <th>Nom Prénom</th>
-                <th>Rôle</th>
-                <th>Email</th>
-            </tr>
+
             @if (etudiants.length > 0) {
             @for (etudiant of etudiants; track etudiant) {
             <tr>
                 <td><img class="image-table" [src]="'http://localhost:3000/uploads/' + etudiant.avatar" alt="Avatar">
                 </td>
                 <td>{{etudiant.prenom}} {{etudiant.nom}}</td>
-                <td>ETUDIANT</td>
+                <td>Etudiant</td>
                 <td><a [href]="'mailto:' + etudiant.email">{{etudiant.email}}</a></td>
             </tr>
             }
